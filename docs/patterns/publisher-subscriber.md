@@ -12,7 +12,7 @@ pnp.pattern.categories: [messaging]
 
 # Publisher-Subscriber pattern
 
-<!-- [!INCLUDE [header](../_includes/header.md)] -->
+[!INCLUDE [header](../_includes/header.md)]
 
 Enable a sender to announce events to multiple interested receivers aynchronously, without coupling senders and receivers.
 
@@ -70,11 +70,11 @@ Consider the following points when deciding how to implement this pattern:
 
 - **Bi-directional communication.** The channels in a publish-subscribe system are treated as unidirectional. If a specific subscriber needs to send acknowledgement or communicate status back to the publisher, consider using the [Request/Reply Pattern](http://www.enterpriseintegrationpatterns.com/patterns/messaging/RequestReply.html). This pattern uses one channel to send a message to the subscriber, and a separate reply channel for communicating back to the publisher.
 
-- **Message ordering.** The order that messages are received by subscribers isn't guaranteed, and doesn't necessarily reflect the creation order of the messages. Design the system to ensure that message processing is idempotent to help eliminate any dependency on the order of message handling.
+- **Message ordering.** The order in which messages are received by subscribers isn't guaranteed, and doesn't necessarily reflect the creation order of the messages. Many messaging services provide capabilities to ensure first-in-first-out (FIFO) ordering of messages.
 
 - **Message priority.** Some solutions may require that messages are processed in a specific order. The [Priority Queue pattern](priority-queue.md) provides a mechanism for ensuring specific messages are delivered before others.
 
-- **Poison messages.** A malformed message, or a task that requires access to resources that aren't available, can cause a service instance to fail. The system should prevent such messages being returned to the queue. Instead, capture and store the details of these messages elsewhere so that they can be analyzed if necessary. Many messaging services provide a dead-letter queue that can hold poison messages for later processing.
+- **Poison messages.** A malformed message, or a task that requires access to resources that aren't available, can cause a service instance to fail. The system should prevent such messages being returned to a channel. Instead, capture and store the details of these messages elsewhere so that they can be analyzed if necessary. Many messaging services provide a dead-letter queue that can hold poison messages for later processing.
 
 - **Repeated messages.** The same message might be sent more than once if, for example, the sender fails after posting a message but before completing any other work it was performing. Another sender could be started and run in its place, and this new sender could repeat the message. The messaging infrastructure may implement duplicate message detection and removal (also known as de-duping), usually based on message IDs, in order to provide at-most-once delivery of messages. If not, the receivers are responsible for either removing duplicate messages or implementing idempotent operations for message processing. Note that a de-duping process can affect system throughput.
     
@@ -85,15 +85,15 @@ Consider the following points when deciding how to implement this pattern:
 - **Message size.** If the amount of data associated with each message is significant, consider using a different storage mechanism such as file or blob storage for this data, and include a reference to it in the message.
 
 - **Distinguish between events and messages.** It can be helpful to make a distinction between two types of datagrams typically published by a system: messages and events.
-    - If a publisher has a certain expectation of how the published information item ought to be handled, and what audience should receive it (such as issuing a command, assigning a job, or handing over control of a collaborative activity), this is usually communicated in a message.  
+    - If a publisher has a certain expectation of how the published information item ought to be handled, and what audience should receive it (such as issuing a command, assigning a job, or handing over control of a collaborative activity), this is usually communicated in a message.
     - Events are intended to inform, but there is typically no expectation of how receivers will use that information. An event captures and conveys a fact. A receiver of the event can determine how to process the fact and doesn’t fulfill any specific expectations held by the publisher.
-    - Services that provide publish-subscribe capabilities may be better suited to one or other other type of information (messages vs. events). For more information, see [Events, Data Points, and Messages](https://azure.microsoft.com/en-us/blog/events-data-points-and-messages-choosing-the-right-azure-messaging-service-for-your-data/). 
+    - Services that provide publish-subscribe capabilities may be better suited to one or other other type of information (messages vs. events). For more information, see [Events, Data Points, and Messages](https://azure.microsoft.com/en-us/blog/events-data-points-and-messages-choosing-the-right-azure-messaging-service-for-your-data/).
 
 ## When to use this pattern
 
 Use this pattern when:
 
-- An application needs to broadcast information to a significant number of interested receivers.
+- An application needs to broadcast information to multiple interested receivers.
 - An application needs to communicate with one or more independently-developed receiving applications, which may use different platforms, programming languages, and communication protocols.
 - An application can send information to receivers without expecting real-time responses.
 - The systems being integrated are designed to support an eventual consistency model for their data. 
@@ -101,43 +101,26 @@ Use this pattern when:
 
 This pattern might not be useful when:
 
-- An application has only a few consumers, or each consumer requires different inforamtion from the sending application.
-- Two closely-related applications require frequent bi-directional communication in near real-time. Communication between these applications may be better served by a point-to-point asynchronous mechanism such as a message queue, along with strategies such as the [Competing Consumer](competing-consumer.md) pattern.
 - [Complex event processing](https://en.wikipedia.org/wiki/Complex_event_processing) systems will likely benefit from a broader event stream processing approach (such as those used in [Kafka](https://kafka.apache.org/) and [Azure Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-what-is-event-hubs)).
- 
-## Technology options / examples
 
-There are many available messaging services and protocols that provide publish-subscribe capabilities between systems. You should review the available technologies and select one that meet your requirements.
 
-- [Advanced Message Queuing Protocol (AQMP)](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol).
-    - **TODO**
+## Example: Azure Event Grid
 
-- [Message Queuing Telemetry Transport (MQTT)](https://en.wikipedia.org/wiki/MQTT)
-    - **TODO**
+[Azure Event Grid](/azure/event-grid/overview) is a fully-managed intelligent event routing service. When a publisher (also called an event source) raises an event, Azure Event Grid sends the event via HTTP to all interested subscribers (also called an event handler). Because events can be raised from both custom applications and native Azure resources, and numerous options exist for enabling event handlers, Azure Event Grid provides a uniform, cloud-scale approach to enabling publish-subscribe model for your Azure application and resource events.
 
-- **Azure messaging services**. Azure offers three services that assist with delivering event messages throughout a solution. Although they have some similarities, each service is designed for particular scenarios. In many cases, the messaging services are complementary and can be used together. For more information on the differences between these services, see [Choose between Azure services that deliver messages](/azure/event-grid/compare-messaging-services).
+> Azure offers multiple services that assist with delivering event messages throughout a solution. Although they have some similarities, each service is designed for particular scenarios. In many cases, these services are complementary and can be used together. For more information on the differences between these services, see [Choose between Azure services that deliver messages](/azure/event-grid/compare-messaging-services).
 
-- [**Azure Service Bus**](/azure/service-bus-messaging/service-bus-fundamentals-hybrid-solutions). Azure Service Bus provides options for simple queuing, publish-and-subscribe (via [topics and subscriptions](/azure/service-bus-messaging/service-bus-queues-topics-subscriptions#topics-and-subscriptions)), and direct connection approaches. This allows you to choose the best communication approach for each of your scenarios while taking advantage of a common platform. Service Bus has capabilities to address many publish-subscribe considerations, such as:
-    - Complex message routing
-    - Duplicate message detection
-    - Dead-letter queues
-    - Transaction processing
-    - Security capabilities such as Managed Service Identity and Role-Based Access Control
-    - AMQP support
-  
- 
->**TODO: Add details or examples for:**
-        
-        - [Azure Event Grid](/azure/event-grid/overview). Reactive programming / event distribution (discrete)/ react to status changes
-        - [Azure Event Hubs](). Big data pipeline	/ Event streaming (series) / Telemetry and distributed data streaming
-                - low latency
-                - capable of receiving and processing millions of events per second
-            - [Azure Relay](/azure/service-bus-relay/relay-what-is-it)
-            - [Implementing event-based communication between microservices]()
-        - [Azure IoT Hub](/azure/iot-hub/iot-hub-what-is-iot-hub)
-        - [SQL Server Service Broker]
-        - [Azure Storage queues] provide basic queuing capabilities, but no built-in publish-subscribe capabilities. Applications requiring publish-subscribe capabilities should use Azure Service Bus. For more information, see [Azure Storage queues and Azure Service Bus queues - compared and contrasted](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted).
-        
+![Publish-subscribe pattern using Azure Event Grid](./_images/event-grid-model.png)  
+
+Event Grid enables the following types of event sources:
+    - Azure resources such as Blob storage and virtual machines raise events to system topics provided by Azure. Event handlers can [subscribe to the topics](/azure/storage/blobs/storage-blob-event-quickstart?toc=%2fazure%2fevent-grid%2ftoc.json) they are interested in. For a list of Azure-generated resource events, see [About Event Grid: Event sources](/azure/event-grid/overview#event-sources). 
+    - An application can [create custom topics](/azure/event-grid/custom-event-quickstart) for raising its events. An application can categorize different types of events by defining multiple custom topics. Event handlers can also filter events to receive only those events they want to receive. For more information, see [Post to a custom topic for Azure Event Grid](https://docs.microsoft.com/en-us/azure/event-grid/post-to-custom-topic).
+
+Event Grid also provides a number of approaches to handling events from event sources:
+    - [Azure Functions](/azure/azure-functions/functions-overview) provides a [serverless approach](https://azure.microsoft.com/en-us/resources/videos/azure-serverless-end-to-end-with-functions-logic-apps-and-event-grid/) to running small pieces of custom code in Azure. You can focus on addressing a specific need without building an entire application or managing the underlying infrastructure. An Azure function can subscribe to an Event Grid topic and reactively run its code whenever an event is received. For more information, see [Handling Event Grid events in Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-grid). 
+    - [Azure Automation](/azure/automation/automation-offering-get-started) automates manual processes using Powershell-based runbooks. A raised event can trigger a subsequent workflow defined in an automation runbook. For more information, see [Integrating Azure Automation with Event Grid](https://docs.microsoft.com/en-us/azure/event-grid/ensure-tags-exists-on-new-virtual-machines).
+    - [Azure Logic Apps](/azure/logic-apps/logic-apps-overview) helps you easily integrate with other services and systems across enterprises or organizations. Hundreds of available connectors let you quickly create workflows across services that react to events raised via Event Grid. For an example, see [Monitor virtual machine changes with Azure Event Grid and Logic Apps](/azure/event-grid/monitor-virtual-machine-changes-event-grid-logic-app).
+
 ## Related patterns and guidance
 
 The following patterns and guidance might be relevant when implementing this pattern:
@@ -146,7 +129,7 @@ The following patterns and guidance might be relevant when implementing this pat
 
 - [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern). The Publish-Subscribe pattern builds on the Observer pattern by decoupling subjects from observers via asynchronous messaging.
 
-- [Message Broker Pattern](https://en.wikipedia.org/wiki/Message_broker). Many messaging subsystems that support a publish-subscribe modek are implemented via a message broker.
+- [Message Broker Pattern](https://en.wikipedia.org/wiki/Message_broker). Many messaging subsystems that support a publish-subscribe model are implemented via a message broker.
 
 <!-- links -->
 
