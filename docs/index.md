@@ -34,7 +34,7 @@ ms.topic: landing-page
                     <div class="card">
                         <img src="_images/reference-architectures.svg" alt="" />
                         <div class="cardText">
-                            <h3>Reference Architectures</h3>
+                            <h3>Azure Reference Architectures</h3>
                             <p>A set of recommended architectures for Azure. Each architecture includes best practices, prescriptive
                                 steps, and a deployable solution.</p>
                         </div>
@@ -70,7 +70,11 @@ ms.topic: landing-page
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/cloud-design-patterns.svg" alt="" />
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/cloud-design-patterns.svg" alt="" />
+                            </div>
+                        </div>
                         <div class="cardText">
                             <h3>Cloud Design Patterns</h3>
                             <p>Design patterns for developers and solution architects. Each pattern describes a problem, a pattern
