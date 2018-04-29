@@ -114,7 +114,7 @@ ms.topic: landing-page
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Designing for Resiliency</h3>
+                            <h3>Design for Resiliency</h3>
                             <p>Learn how to design resilient applications for Azure.</p>
                         </div>
                     </div>
