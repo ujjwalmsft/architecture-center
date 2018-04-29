@@ -77,8 +77,7 @@ ms.topic: landing-page
                         </div>
                         <div class="cardText">
                             <h3>Cloud Design Patterns</h3>
-                            <p>Design patterns for developers and solution architects. Each pattern describes a problem, a pattern
-                                that addresses the problem, and an example based on Azure.</p>
+                            <p>Each design pattern describes a common problem, a solution to the problem, and an example based on Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -159,7 +158,7 @@ ms.topic: landing-page
                         </div>
                         <div class="cardText">
                             <h3>Performance Antipatterns</h3>
-                            <p>How to detect and fix some common causes of performance and scalability problems in cloud applications.</p>
+                            <p>How to detect and fix some common performance and scalability problems in cloud applications.</p>
                         </div>
                     </div>
                 </div>
@@ -225,7 +224,7 @@ ms.topic: landing-page
                         </div>
                         <div class="cardText">
                             <h3>Azure Virtual Datacenter</h3>
-                            <p>When deploying enterprise workloads to the cloud, organizations must balance governance with developer agility. Azure Virtual Datacenter provides models to achieve this balance with an emphasis on governance.</p>
+                            <p>When deploying enterprise workloads to the cloud, organizations must balance governance with developer agility. Virtual Datacenter is a model to achieve this balance.</p>
                         </div>
                     </div>
                 </div>
