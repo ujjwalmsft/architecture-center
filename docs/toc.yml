@@ -16,60 +16,58 @@
     href: architecture-styles/index.md
     items:
     - name: N-tier application
-      href: architecture-styles/n-tier.md
+      href: guide/architecture-styles/n-tier.md
     - name: Web-queue-worker
-      href: architecture-styles/web-queue-worker.md
+      href: guide/architecture-styles/web-queue-worker.md
     - name: Microservices
-      href: architecture-styles/microservices.md
+      href: guide/architecture-styles/microservices.md
     - name: CQRS
-      href: architecture-styles/cqrs.md
+      href: guide/architecture-styles/cqrs.md
     - name: Event-driven architecture
-      href: architecture-styles/event-driven.md
+      href: guide/architecture-styles/event-driven.md
     - name: Big data
-      href: architecture-styles/big-data.md
+      href: guide/architecture-styles/big-data.md
     - name: Big compute
-      href: architecture-styles/big-compute.md
+      href: guide/architecture-styles/big-compute.md
   - name: Choosing a compute service
     items:
     - name: Overview
-      href: technology-choices/compute-overview.md
+      href: guide/technology-choices/compute-overview.md
     - name: Decision tree
-      href: technology-choices/compute-decision-tree.md
+      href: guide/technology-choices/compute-decision-tree.md
     - name: Compute comparison
-      href: technology-choices/compute-comparison.md
+      href: guide/technology-choices/compute-comparison.md
   - name: Choosing a data store
     items:
     - name: Overview
-      href: technology-choices/data-store-overview.md
+      href: guide/technology-choices/data-store-overview.md
     - name: Data store comparison
-      href: technology-choices/data-store-comparison.md
+      href: guide/technology-choices/data-store-comparison.md
   - name: Design principles
-    href: design-principles/index.md
+    href: guide/design-principles/index.md
     items:
     - name: Design for self-healing
-      href: design-principles/self-healing.md
+      href: guide/design-principles/self-healing.md
     - name: Make all things redundant
-      href: design-principles/redundancy.md
+      href: guide/design-principles/redundancy.md
     - name: Minimize coordination
-      href: design-principles/minimize-coordination.md
+      href: guide/design-principles/minimize-coordination.md
     - name: Design to scale out
-      href: design-principles/scale-out.md
+      href: guide/design-principles/scale-out.md
     - name: Partition around limits
-      href: design-principles/partition.md
+      href: guide/design-principles/partition.md
     - name: Design for operations
-      href: design-principles/design-for-operations.md
+      href: guide/design-principles/design-for-operations.md
     - name: Use managed services
-      href: design-principles/managed-services.md
+      href: guide/design-principles/managed-services.md
     - name: Use the best data store for the job
-      href: design-principles/use-the-best-data-store.md
+      href: guide/design-principles/use-the-best-data-store.md
     - name: Design for evolution
-      href: design-principles/design-for-evolution.md
+      href: guide/design-principles/design-for-evolution.md
     - name: Build for the needs of business
-      href: design-principles/build-for-business.md
+      href: guide/design-principles/build-for-business.md
   - name: Pillars of software quality
-    href: pillars.md
-
-
+    href: guide/pillars.md
 
 - name: Data Architecture Guide
   href: data-guide/index.md
