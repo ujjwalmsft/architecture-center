@@ -1,12 +1,20 @@
 - name: Cloud Fundamentals
   href: index.md
 
+- name: Pillars of software quality
+  href: architecture-guide/pillars.md
+
+- name: Design for Resiliency
+  href: resiliency.md
+
 - name: Application architecture guide
-  href: architecture-guide/index.md
   items:
+  - name: Introduction
+    href: architecture-guide/index.md
   - name: Architecture styles
-    href: architecture-guide/architecture-styles/index.md
     items:
+    - name: Overview
+      href: architecture-guide/architecture-styles/index.md
     - name: N-tier application
       href: architecture-guide/architecture-styles/n-tier.md
     - name: Web-queue-worker
@@ -36,8 +44,9 @@
     - name: Data store comparison
       href: architecture-guide/technology-choices/data-store-comparison.md
   - name: Design principles
-    href: architecture-guide/design-principles/index.md
     items:
+    - name: Overview
+      href: architecture-guide/design-principles/index.md
     - name: Design for self-healing
       href: architecture-guide/design-principles/self-healing.md
     - name: Make all things redundant
@@ -58,12 +67,11 @@
       href: architecture-guide/design-principles/design-for-evolution.md
     - name: Build for the needs of business
       href: architecture-guide/design-principles/build-for-business.md
-  - name: Pillars of software quality
-    href: architecture-guide/pillars.md
 
 - name: Data architecture guide
-  href: data-guide/index.md
   items:
+  - name: Introduction
+    href: data-guide/index.md
   - name: Traditional RDBMS workloads
     items:
     - name: Overview
@@ -138,8 +146,9 @@
       href: data-guide/scenarios/securing-data-solutions.md 
 
 - name: Cloud design patterns
-  href: patterns/index.md
   items:
+  - name: Introduction
+    href: patterns/index.md
   - name: Categories
     items:
     - name: Availability
@@ -267,14 +276,4 @@
     href: antipatterns/no-caching/index.md
   - name: Synchronous I/O
     href: antipatterns/synchronous-io/index.md
-
-- name: Design for Resiliency
-  items:
-  - name: Designing resilient applications
-    href: resiliency/index.md
-  - name: Resiliency checklist
-    href: checklist/resiliency.md
-    maintainContext: true
-  - name: Failure mode analysis
-    href: resiliency/failure-mode-analysis.md
 

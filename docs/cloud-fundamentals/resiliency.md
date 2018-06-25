@@ -103,13 +103,13 @@ Consider an App Service web app that writes to Azure SQL Database. At the time o
 * App Service Web Apps = 99.95%
 * SQL Database = 99.99%
 
-![Composite SLA](./images/sla1.png)
+![Composite SLA](./_images/sla1.png)
 
 What is the maximum downtime you would expect for this application? If either service fails, the whole application fails. In general, the probability of each service failing is independent, so the composite SLA for this application is 99.95% &times; 99.99% = 99.94%. That's lower than the individual SLAs, which isn't surprising, because an application that relies on multiple services has more potential failure points. 
 
 On the other hand, you can improve the composite SLA by creating independent fallback paths. For example, if SQL Database is unavailable, put transactions into a queue, to be processed later.
 
-![Composite SLA](./images/sla2.png)
+![Composite SLA](./_images/sla2.png)
 
 With this design, the application is still available even if it can't connect to the database. However, it fails if the database and the queue both fail at the same time. The expected percentage of time for a simultaneous failure is 0.0001 &times; 0.001, so the composite SLA for this combined path is:  
 
@@ -143,7 +143,7 @@ One of the main ways to make an application resilient is through redundancy. But
 
 Azure has a number of features to make an application redundant at every level of failure, from an individual VM to an entire region. 
 
-![](./images/redundancy.svg)
+![](./_images/redundancy.svg)
 
 **Single VM**. Azure provides an uptime SLA for single VMs. Although you can get a higher SLA by running two or more VMs, a single VM may be reliable enough for some workloads. For production workloads, we recommend using two or more VMs for redundancy. 
 
@@ -189,7 +189,7 @@ Transient failures can be caused by momentary loss of network connectivity, a dr
 
 Each retry attempt adds to the total latency. Also, too many failed requests can cause a bottleneck, as pending requests accumulate in the queue. These blocked requests might hold critical system resources such as memory, threads, database connections, and so on, which can cause cascading failures. To avoid this, increase the delay between each retry attempt, and limit the total number of failed requests.
 
-![Composite SLA](./images/retry.png)
+![Composite SLA](./_images/retry.png)
 
 For more information, see [Retry Pattern][retry-pattern].
 
@@ -255,7 +255,7 @@ Examples:
 * Use separate thread pools to isolate calls to different services. This helps to prevent cascading failures if one of the services fails. For an example, see the Netflix [Hystrix library][hystrix].
 * Use [containers][containers] to limit the resources available to a particular subsystem. 
 
-![Composite SLA](./images/bulkhead.png)
+![Composite SLA](./_images/bulkhead.png)
 
 ### Apply compensating transactions
 A compensating transaction is a transaction that undoes the effects of another completed transaction.
@@ -317,7 +317,7 @@ Monitoring a large-scale distributed system poses a significant challenge. Think
 
 You can think of the monitoring and diagnostics process as a pipeline with several distinct stages:
 
-![Composite SLA](./images/monitoring.png)
+![Composite SLA](./_images/monitoring.png)
 
 * **Instrumentation**. The raw data for monitoring and diagnostics comes from a variety of sources, including application logs, web server logs, OS performance counters, database logs, and diagnostics built into the Azure platform. Most Azure services have a diagnostics feature that you can use to determine the cause of problems.
 * **Collection and storage**. Raw instrumentation data can be held in various locations and with various formats (e.g., application trace logs, IIS logs, performance counters). These disparate sources are collected, consolidated, and put into reliable storage.
