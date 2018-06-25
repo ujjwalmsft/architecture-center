@@ -11,14 +11,14 @@ ms.topic: landing-page
 <ul class="panelContent cardsC">
     <!-- A3G -->
     <li>
-        <a href="/azure/architecture/guide">
+        <a href="/azure/architecture/cloud-fundamentals">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
                         <img src="_images/a3g-logo.svg" alt="" />
                         <div class="cardText">
-                            <h3>Azure Application Architecture Guide</h3>
-                            <p> A guide to designing scalable, resilient, and highly available applications, based on proven
+                            <h3>Cloud Fundamentals</h3>
+                            <p>A guide to designing scalable, resilient, and highly available applications, based on proven
                                 practices that we have learned from customer engagements.</p>
                         </div>
                     </div>
