@@ -5,7 +5,9 @@ layout: LandingPage
 ms.topic: landing-page
 ---
 
-# Azure Architecture Center
+# Cloud Fundamentals
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
 <!-- main panel -->
 <ul class="panelContent cardsI">
@@ -32,7 +34,7 @@ ms.topic: landing-page
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/a3g-logo.svg" alt="" />
+                        <img src="_images/data-guide.svg" alt="" />
                         <div class="cardText">
                             <h3>Data Architecture Guide</h3>
                             <p>A structured approach to designing data-centric solutions on Microsoft Azure, including traditional OLTP and OLAP workloads, Big Data, streaming analytics, </p>
