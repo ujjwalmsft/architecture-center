@@ -8,7 +8,7 @@ ms.topic: landing-page
 # Azure Architecture Center
 
 <!-- main panel -->
-<ul class="panelContent cardsC">
+<ul class="panelContent cardsI">
     <!-- A3G -->
     <li>
         <a href="/azure/architecture/cloud-fundamentals/architecture-guide">
@@ -106,7 +106,7 @@ ms.topic: landing-page
     </li>
     <!-- Resiliency -->
     <li>
-        <a href="/azure/architecture/resiliency">
+        <a href="/azure/architecture/cloud-fundamentals/resiliency">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
@@ -116,7 +116,7 @@ ms.topic: landing-page
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Designing for Resiliency</h3>
+                            <h3>Design for Resiliency</h3>
                             <p>Learn how to design resilient applications for Azure.</p>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ ms.topic: landing-page
     </li>
     <!-- Performance anti-practices -->
     <li>
-        <a href="/azure/architecture/antipatterns">
+        <a href="/azure/architecture/cloud-fundamentals/antipatterns">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">

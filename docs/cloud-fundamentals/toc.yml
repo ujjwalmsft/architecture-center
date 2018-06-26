@@ -1,12 +1,6 @@
 - name: Cloud Fundamentals
   href: index.md
 
-- name: Pillars of software quality
-  href: architecture-guide/pillars.md
-
-- name: Design for Resiliency
-  href: resiliency.md
-
 - name: Application architecture guide
   items:
   - name: Introduction
@@ -43,7 +37,7 @@
       href: architecture-guide/technology-choices/data-store-overview.md
     - name: Data store comparison
       href: architecture-guide/technology-choices/data-store-comparison.md
-  - name: Design principles
+  - name: Ten design principles for the cloud
     items:
     - name: Overview
       href: architecture-guide/design-principles/index.md
@@ -67,6 +61,10 @@
       href: architecture-guide/design-principles/design-for-evolution.md
     - name: Build for the needs of business
       href: architecture-guide/design-principles/build-for-business.md
+    - name: Pillars of software quality
+      href: architecture-guide/pillars.md
+    - name: Design for resiliency
+      href: resiliency.md
 
 - name: Data architecture guide
   items:
