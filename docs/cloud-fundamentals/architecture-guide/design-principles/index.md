@@ -4,7 +4,7 @@ description: Design principles for Azure applications
 author: MikeWasson
 ---
 
-# Design principles for Azure applications
+# Ten design principles for the cloud
 
 Follow these design principles to make your application more scalable, resilient, and manageable. 
 

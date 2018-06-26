@@ -61,10 +61,10 @@
       href: architecture-guide/design-principles/design-for-evolution.md
     - name: Build for the needs of business
       href: architecture-guide/design-principles/build-for-business.md
-    - name: Pillars of software quality
-      href: architecture-guide/pillars.md
-    - name: Design for resiliency
-      href: resiliency.md
+  - name: Pillars of software quality
+    href: architecture-guide/pillars.md
+  - name: Design for resiliency
+    href: resiliency.md
 
 - name: Data architecture guide
   items:
@@ -230,7 +230,30 @@
   - name: Valet Key
     href: patterns/valet-key.md
 
-- name: Best practices
+- name: Designing microservices on Azure
+  items:
+  - name: Introduction
+    href: microservices/index.md
+  - name: Domain analysis
+    href: microservices/domain-analysis.md
+  - name: Identifying microservice boundaries
+    href: microservices/microservice-boundaries.md
+  - name: Data considerations
+    href: microservices/data-considerations.md
+  - name: Interservice communication
+    href: microservices/interservice-communication.md
+  - name: API design
+    href: microservices/api-design.md
+  - name: Ingestion and workflow
+    href: microservices/ingestion-workflow.md
+  - name: API gateways
+    href: microservices/gateway.md
+  - name: Logging and monitoring
+    href: microservices/logging-monitoring.md
+  - name: CI/CD
+    href: microservices/ci-cd.md
+
+- name: Best practices for cloud applications
   items:
   - name: API design
     href: best-practices/api-design.md
@@ -256,8 +279,9 @@
     href: best-practices/retry-service-specific.md
 
 - name: Performance Antipatterns
-  href: antipatterns/index.md
   items:
+  - name: Overview
+    href: antipatterns/index.md
   - name: Busy Database
     href: antipatterns/busy-database/index.md
   - name: Busy Front End
@@ -275,3 +299,31 @@
   - name: Synchronous I/O
     href: antipatterns/synchronous-io/index.md
 
+- name: Manage identity in multitenant applications
+  items:
+  - name: Introduction
+    href: multitenant-identity/index.md
+  - name: The Tailspin scenario
+    href: multitenant-identity/tailspin.md
+  - name: Authentication
+    href: multitenant-identity/authenticate.md
+  - name: Claims-based identity
+    href: multitenant-identity/claims.md
+  - name: Tenant sign-up
+    href: multitenant-identity/signup.md
+  - name: Application roles
+    href: multitenant-identity/app-roles.md
+  - name: Authorization
+    href: multitenant-identity/authorize.md
+  - name: Secure a web API
+    href: multitenant-identity/web-api.md
+  - name: Cache access tokens
+    href: multitenant-identity/token-cache.md
+  - name: Client assertion
+    href: multitenant-identity/client-assertion.md
+  - name: Protect application secrets
+    href: multitenant-identity/key-vault.md
+  - name: Federate with a customer's AD FS
+    href: multitenant-identity/adfs.md
+  - name: Run the Surveys application
+    href: multitenant-identity/run-the-app.md
