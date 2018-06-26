@@ -230,7 +230,7 @@
   - name: Valet Key
     href: patterns/valet-key.md
 
-- name: Design and build a microservices architecture
+- name: Designing microservices architectures
   items:
   - name: Introduction
     href: microservices/index.md
@@ -253,7 +253,7 @@
   - name: CI/CD
     href: microservices/ci-cd.md
 
-- name: Manage identity in a multitenant application
+- name: Managing identity in multitenant applications
   items:
   - name: Introduction
     href: multitenant-identity/index.md

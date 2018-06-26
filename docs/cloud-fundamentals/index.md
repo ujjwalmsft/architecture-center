@@ -110,7 +110,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Design and build microservices architectures</h3>
+                            <h3>Designing microservices architectures</h3>
                             <p>This multi-part series takes you through the process of designing and building a microservices architecture on Azure. A reference implementation is included.</p>
                         </div>
                     </div>
@@ -130,7 +130,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Manage identity in multitenant applications</h3>
+                            <h3>Managing identity in multitenant applications</h3>
                             <p>Understand the best practices for multitenancy, when using Azure AD for identity management.</p>
                         </div>
                     </div>
