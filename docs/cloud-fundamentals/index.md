@@ -156,8 +156,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                         </div>
                         <div class="cardText">
                             <h3>Best practices for cloud applications</h3>
-                            <p>Best practices for cloud applications, covering aspects such as auto-scaling, caching, data partitioning,
-                                API design, and others.</p>
+                            <p>A catalog of best practices, organized around topics such as API design, caching, data partitioning, and background jobs.</p>
                         </div>
                     </div>
                 </div>
