@@ -17,7 +17,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/a3g-logo.svg" alt="" />
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/a3g-logo.svg" alt="" />
+                            </div>
+                        </div>
                         <div class="cardText">
                             <h3>Azure Application Architecture Guide</h3>
                             <p> A guide to designing scalable, resilient, and highly available applications, based on proven
@@ -34,7 +38,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/data-guide.svg" alt="" />
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/data-guide.svg" alt="" />
+                            </div>
+                        </div>
                         <div class="cardText">
                             <h3>Data Architecture Guide</h3>
                             <p>A structured approach to designing data-centric solutions on Microsoft Azure, including traditional OLTP and OLAP workloads, Big Data, streaming analytics, </p>
@@ -50,7 +58,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/cloud-design-patterns.svg" alt="" />
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/cloud-design-patterns.svg" alt="" />
+                            </div>
+                        </div>
                         <div class="cardText">
                             <h3>Cloud Design Patterns</h3>
                             <p>Design patterns for developers and solution architects. Each pattern describes a problem, a pattern
