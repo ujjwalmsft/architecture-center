@@ -230,7 +230,7 @@
   - name: Valet Key
     href: patterns/valet-key.md
 
-- name: Designing microservices on Azure
+- name: Design and build a microservices architecture
   items:
   - name: Introduction
     href: microservices/index.md
@@ -253,53 +253,7 @@
   - name: CI/CD
     href: microservices/ci-cd.md
 
-- name: Best practices for cloud applications
-  items:
-  - name: API design
-    href: best-practices/api-design.md
-  - name: API implementation
-    href: best-practices/api-implementation.md
-  - name: Autoscaling
-    href: best-practices/auto-scaling.md
-  - name: Background jobs
-    href: best-practices/background-jobs.md
-  - name: Caching
-    href: best-practices/caching.md
-  - name: Content Delivery Network
-    href: best-practices/cdn.md
-  - name: Data partitioning
-    href: best-practices/data-partitioning.md
-  - name: Monitoring and diagnostics
-    href: best-practices/monitoring.md
-  - name: Naming conventions
-    href: best-practices/naming-conventions.md
-  - name: Transient fault handling
-    href: best-practices/transient-faults.md
-  - name: Retry guidance for specific services
-    href: best-practices/retry-service-specific.md
-
-- name: Performance Antipatterns
-  items:
-  - name: Overview
-    href: antipatterns/index.md
-  - name: Busy Database
-    href: antipatterns/busy-database/index.md
-  - name: Busy Front End
-    href: antipatterns/busy-front-end/index.md
-  - name: Chatty I/O
-    href: antipatterns/chatty-io/index.md
-  - name: Extraneous Fetching
-    href: antipatterns/extraneous-fetching/index.md
-  - name: Improper Instantiation
-    href: antipatterns/improper-instantiation/index.md
-  - name: Monolithic Persistence
-    href: antipatterns/monolithic-persistence/index.md
-  - name: No Caching
-    href: antipatterns/no-caching/index.md
-  - name: Synchronous I/O
-    href: antipatterns/synchronous-io/index.md
-
-- name: Manage identity in multitenant applications
+- name: Manage identity in a multitenant application
   items:
   - name: Introduction
     href: multitenant-identity/index.md
@@ -327,3 +281,50 @@
     href: multitenant-identity/adfs.md
   - name: Run the Surveys application
     href: multitenant-identity/run-the-app.md
+
+- name: Best practices for cloud applications
+  items:
+  - name: API design
+    href: best-practices/api-design.md
+  - name: API implementation
+    href: best-practices/api-implementation.md
+  - name: Autoscaling
+    href: best-practices/auto-scaling.md
+  - name: Background jobs
+    href: best-practices/background-jobs.md
+  - name: Caching
+    href: best-practices/caching.md
+  - name: Content Delivery Network
+    href: best-practices/cdn.md
+  - name: Data partitioning
+    href: best-practices/data-partitioning.md
+  - name: Monitoring and diagnostics
+    href: best-practices/monitoring.md
+  - name: Naming conventions
+    href: best-practices/naming-conventions.md
+  - name: Transient fault handling
+    href: best-practices/transient-faults.md
+  - name: Retry guidance for specific services
+    href: best-practices/retry-service-specific.md
+
+- name: Performance antipatterns
+  items:
+  - name: Overview
+    href: antipatterns/index.md
+  - name: Busy Database
+    href: antipatterns/busy-database/index.md
+  - name: Busy Front End
+    href: antipatterns/busy-front-end/index.md
+  - name: Chatty I/O
+    href: antipatterns/chatty-io/index.md
+  - name: Extraneous Fetching
+    href: antipatterns/extraneous-fetching/index.md
+  - name: Improper Instantiation
+    href: antipatterns/improper-instantiation/index.md
+  - name: Monolithic Persistence
+    href: antipatterns/monolithic-persistence/index.md
+  - name: No Caching
+    href: antipatterns/no-caching/index.md
+  - name: Synchronous I/O
+    href: antipatterns/synchronous-io/index.md
+
