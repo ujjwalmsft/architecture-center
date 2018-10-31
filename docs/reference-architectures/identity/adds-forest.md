@@ -90,17 +90,7 @@ A deployment for this architecture is available on [GitHub][github]. Note that t
 
 ### Prerequisites
 
-1. Clone, fork, or download the zip file for the [reference architectures][github] GitHub repository.
-
-2. Install [Azure CLI 2.0][azure-cli-2].
-
-3. Install the [Azure building blocks][azbb] npm package.
-
-4. From a command prompt, bash prompt, or PowerShell prompt, log into your Azure account by using the command below.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### Deploy the simulated on-premises datacenter
 
@@ -176,7 +166,7 @@ A deployment for this architecture is available on [GitHub][github]. Note that t
 [creating-forest-trusts]: https://technet.microsoft.com/library/cc816810(v=ws.10).aspx
 [github]: https://github.com/mspnp/reference-architectures/tree/master/identity/adds-forest
 [incoming-trust]: https://raw.githubusercontent.com/mspnp/reference-architectures/master/identity/adds-forest/extensions/incoming-trust.ps1
-[microsoft_systems_center]: https://www.microsoft.com/server-cloud/products/system-center-2016/
+[microsoft_systems_center]: https://microsoft.com/cloud-platform/system-center
 [monitoring_ad]: https://msdn.microsoft.com/library/bb727046.aspx
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [solution-script]: https://raw.githubusercontent.com/mspnp/reference-architectures/master/identity/adds-forest/Deploy-ReferenceArchitecture.ps1

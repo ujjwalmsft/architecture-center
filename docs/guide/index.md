@@ -1,15 +1,12 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
+ms.date: 08/30/2018
 ---
 
 # Azure Application Architecture Guide
 
 This guide presents a structured approach for designing applications on Azure that are scalable, resilient, and highly available. It is based on proven practices that we have learned from customer engagements.
-
-<br/>
-
-<img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
 ## Introduction
 
@@ -57,8 +54,7 @@ The first decision point is the most fundamental. What kind of architecture are 
 
 Learn more:
 
-- [Architecture styles][arch-styles]
-- [Azure reference architectures][ref-archs]
+- [Architecture styles](./architecture-styles/index.md)
 
 ### Technology choices
 
@@ -75,36 +71,14 @@ We have identified ten high-level design principles that will make your applicat
 
 Learn more:
 
-- [Design principles for Azure applications][design-principles]
-- [Best practices when building for the cloud][best-practices]
+- [Design principles](./design-principles/index.md)
+
 
 ### Quality pillars
 
 A successful cloud application will focus on five pillars of software quality: Scalability, availability, resiliency, management, and security. Use our design review checklists to review your architecture according to these quality pillars.
 
-Learn more:
-
-- [Pillars of software quality][pillars]
-- [Design review checklists][checklists] 
-
-### Cloud design patterns
-
-Design patterns are general solutions to common software design problem. We have identified a set of design patterns that are especially useful when designing distributed applications for the cloud.
-
-Learn more:
-
-- [Catalog of cloud design patterns](../patterns/index.md)
+- [Quality pillars](./pillars.md)
 
 
-[arch-styles]: ./architecture-styles/index.md
-[best-practices]: ../best-practices/index.md
-[checklists]: ../checklist/index.md
-[compute-options]: ./technology-choices/compute-comparison.md
-[design-principles]: ./design-principles/index.md
 [ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
-[patterns]: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
-[pillars]: ./pillars.md
-[ref-archs]: ../reference-architectures/index.md
-[storage-options]: ./technology-choices/data-store-comparison.md
-[technology-choices]: ./technology-choices/index.md
-

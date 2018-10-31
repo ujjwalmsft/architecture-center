@@ -16,7 +16,7 @@ Availability is the proportion of time that a system is functional and working, 
 
 **Decompose workloads by service-level objective.** If a service is composed of critical and less-critical workloads, manage them differently and specify the service features and number of instances to meet their availability requirements.
 
-**Minimize and understand service dependencies.** Minimize the number of different services used where possible, and ensure you understand all of the feature and service dependencies that exist in the system. This includes the nature of these dependencies, and the impact of failure or reduced performance in each one on the overall application. See [Defining your resiliency requirements](../resiliency/index.md#defining-your-resiliency-requirements).
+**Minimize and understand service dependencies.** Minimize the number of different services used where possible, and ensure you understand all of the feature and service dependencies that exist in the system. This includes the nature of these dependencies, and the impact of failure or reduced performance in each one on the overall application.
 
 **Design tasks and messages to be idempotent where possible**. An operation is idempotent if it can be repeated multiple times and produce the same result. Idempotency can ensure that duplicated requests don't cause problems. Message consumers and the operations they carry out should be idempotent so that repeating a previously executed operation does not render the results invalid. This may mean detecting duplicated messages, or ensuring consistency by using an optimistic approach to handling conflicts.
 
@@ -36,7 +36,7 @@ Availability is the proportion of time that a system is functional and working, 
 
 **Use staging and production features of the platform.**. For example, Azure App Service supports [deployment slots](/azure/app-service/web-sites-staged-publishing), which you can use to stage a deployment before swapping it to production. Azure Service Fabric supports [rolling upgrades](/azure/service-fabric/service-fabric-application-upgrade) to application services.
 
-**Place virtual machines (VMs) in an availability set.** To maximize availability, create multiple instances of each VM role and place these instances in the same availability set. If have multiple VMs that serve different roles, such as different application tiers, create an availability set for each VM role. For example, create an availability set for the web tier and another for the data tier.
+**Place virtual machines (VMs) in an availability set.** To maximize availability, create multiple instances of each VM role and place these instances in the same availability set. If you have multiple VMs that serve different roles, such as different application tiers, create an availability set for each VM role. For example, create an availability set for the web tier and another for the data tier.
 
 ## Data management
 

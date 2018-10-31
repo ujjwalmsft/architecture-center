@@ -2,6 +2,7 @@
 title: Design for change
 description: An evolutionary design is key for continuous innovation.
 author: MikeWasson
+ms.date: 08/30/2018
 ---
 
 # Design for evolution
@@ -12,7 +13,7 @@ All successful applications change over time, whether to fix bugs, add new featu
 
 This problem is not limited to monolithic applications. An application can be decomposed into services, but still exhibit the sort of tight coupling that leaves the system rigid and brittle. But when services are designed to evolve, teams can innovate and continuously deliver new features. 
 
-Microservices are becoming a popular way to achieve an evolutonary design, because they address many of the considerations listed here.
+Microservices are becoming a popular way to achieve an evolutionary design, because they address many of the considerations listed here.
 
 ## Recommendations
 

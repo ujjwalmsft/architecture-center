@@ -3,6 +3,7 @@ title: Azure Architecture Center
 description: The Azure Architecture Center is the official center for guidance, blueprints, patterns, and best practices for building solutions with Microsoft Azure. It is curated by the Microsoft patterns & practices team.
 layout: LandingPage
 ms.topic: landing-page
+ms.date: 09/28/2018
 ---
 
 # Azure Architecture Center
@@ -43,17 +44,16 @@ ms.topic: landing-page
             </div>
         </a>
     </li>
-    <!-- Cloud design patterns -->
+    <!-- Cloud Adoption -->
     <li>
-        <a href="/azure/architecture/patterns/">
+        <a href="/azure/architecture/cloud-adoption/">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/cloud-design-patterns.svg" alt="" />
+                        <img src="_images/cloud-adoption.svg" alt="" />
                         <div class="cardText">
-                            <h3>Cloud Design Patterns</h3>
-                            <p>Design patterns for developers and solution architects. Each pattern describes a problem, a pattern
-                                that addresses the problem, and an example based on Azure.</p>
+                            <h3>Enterprise Cloud Adoption</h3>
+                            <p>This guide outlines a process for creating an organization-wide cloud adoption strategy. It focuses on organizational readiness, governance, and infrastructure.</p>
                         </div>
                     </div>
                 </div>
@@ -76,8 +76,8 @@ ms.topic: landing-page
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Building Microservices on Azure</h3>
-                            <p>This multi-part series takes you through the process of designing and building a microservices architecture on Azure. A reference implementation is included.</p>
+                            <h3>Build Microservices on Azure</h3>
+                            <p>This design guide takes you through the process of designing and building a microservices architecture on Azure. A reference implementation is included.</p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ ms.topic: landing-page
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Best Practices for Cloud Applications</h3>
+                            <h3>Cloud Best Practices</h3>
                             <p>Best practices for cloud applications, covering aspects such as auto-scaling, caching, data partitioning,
                                 API design, and others.</p>
                         </div>
@@ -137,7 +137,7 @@ ms.topic: landing-page
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Designing for Resiliency</h3>
+                            <h3>Design for Resiliency</h3>
                             <p>Learn how to design resilient applications for Azure.</p>
                         </div>
                     </div>
@@ -159,6 +159,26 @@ ms.topic: landing-page
                         <div class="cardText">
                             <h3>Azure Building Blocks</h3>
                             <p>Simplify deployment of Azure resources. With a single settings file, deploy complex architectures in Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- design patterns -->
+    <li>
+        <a href="/azure/architecture/patterns">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/cloud-design-patterns.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Cloud Design Patterns</h3>
+                            <p>Design patterns for developers and solution architects. Each pattern describes a problem, a pattern that addresses the problem, and an example based on Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -245,104 +265,97 @@ ms.topic: landing-page
             </div>
         </a>
     </li>
-    <!-- Sharepoint -->
-    <li>
-        <a href="/azure/architecture/reference-architectures/sharepoint">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sharepoint/images/sharepoint.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Run SharePoint Server 2016 on Azure</h3>
-                            <p>Deploy and run a high availability SharePoint Server 2016 farm on Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- SAP -->
-    <li>
-        <a href="/azure/architecture/reference-architectures/sap">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sap/images/sap.svg" width="100%" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Run SAP HANA on Azure</h3>
-                            <p>Deploy and run SAP NetWeaver and SAP HANA in a high availability environment on Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Multitenant identity -->
-    <li>
-        <a href="/azure/architecture/multitenant-identity">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/multitenant-identity.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Identity Management for Multitenant Applications</h3>
-                            <p>Understand the best practices for multitenancy, when using Azure AD for identity management.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- AzureCAT blog -->
-    <li>
-        <a href="https://blogs.msdn.microsoft.com/azurecat/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/azurecat.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Azure Customer Advisory Team</h3>
-                            <p>The AzureCAT team&#39;s blog</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- SQL CAT blog -->
-    <li>
-        <a href="https://blogs.msdn.microsoft.com/sqlcat/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/sqlcat.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>SQL Server Customer Advisory Team</h3>
-                            <p>The SQLCAT team&#39;s blog</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
 </ul>
+
+---
+
+## Build your skills with Microsoft Learn
+
+<ul class="panelContent cardsFTitle">
+    <li>
+        <a href="/learn/modules/pillars-of-a-great-azure-architecture/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/pillars-of-a-great-azure-architecture.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3> Pillars of a great Azure architecture</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li><li>
+        <a href="/learn/modules/design-for-security-in-azure/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/design-for-security-in-azure.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3> Design for security in Azure</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li><li>
+        <a href="/learn/modules/design-for-performance-and-scalability-in-azure/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/design-for-performance-and-scalability-in-azure.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Design for performance and scalability in Azure</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li><li>
+        <a href="/learn/modules/design-for-efficiency-and-operations-in-azure/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/design-for-efficiency-and-operations-in-azure.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Design for efficiency and operations in Azure</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li><li>
+        <a href="/learn/modules/design-for-availability-and-recoverability-in-azure/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/design-for-availability-and-recoverability-in-azure.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Design for availability and recoverability in Azure</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li>
+</ul>   

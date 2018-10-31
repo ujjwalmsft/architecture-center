@@ -116,6 +116,8 @@ Use [audit logs][audit-logs] to see provisioning actions and other VM events.
 
 **Data encryption.** Consider [Azure Disk Encryption][disk-encryption] if you need to encrypt the OS and data disks. 
 
+**DDoS protection**. We recommend enabling [DDoS Protection Standard](/azure/virtual-network/ddos-protection-overview), which provides additional DDoS mitigation for resources in a VNet. Although basic DDoS protection is automatically enabled as part of the Azure platform, DDoS Protection Standard provides mitigation capabilities that are tuned specifically to Azure Virtual Network resources.  
+
 ## Deploy the solution
 
 A deployment for this architecture is available on [GitHub][github-folder]. It deploys the following:
@@ -127,17 +129,7 @@ A deployment for this architecture is available on [GitHub][github-folder]. It d
 
 ### Prerequisites
 
-1. Clone, fork, or download the zip file for the [reference architectures][ref-arch-repo] GitHub repository.
-
-2. Make sure you have the Azure CLI 2.0 installed on your computer. For CLI installation instructions, see [Install Azure CLI 2.0][azure-cli-2].
-
-3. Install the [Azure building blocks][azbb] npm package.
-
-4. From a command prompt, bash prompt, or PowerShell prompt, enter the following command to log into your Azure account.
-
-  ```bash
-  az login
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### Deploy the solution using azbb
 

@@ -41,7 +41,7 @@ A recommended pattern for naming subscriptions is:
 | Contoso |IT |InternalApps |Production |Contoso IT InternalApps Production |
 | Contoso |IT |InternalApps |Dev |Contoso IT InternalApps Dev |
 
-For more information on how to organize subscriptions for larger enterprises, read our [prescriptive subscription governance guidance][scaffold].
+For more information on how to organize subscriptions for larger enterprises, see [Azure enterprise scaffold - prescriptive subscription governance][scaffold].
 
 ## Use affixes to avoid ambiguity
 
@@ -74,7 +74,7 @@ In general, avoid having any special characters (`-` or `_`) as the first or las
 
 | Entity | Scope | Length | Casing | Valid Characters | Suggested Pattern | Example |
 | --- | --- | --- | --- | --- | --- | --- |
-|Resource Group |Subscription |1-90 |Case insensitive |Alphanumeric, underscore, parentheses, hyphen, and period (except at end) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Resource Group |Subscription |1-90 |Case insensitive |Alphanumeric, underscore, parentheses, hyphen, period (except at end), and Unicode characters that match the regex documented [here](/rest/api/resources/resourcegroups/createorupdate).  |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Availability Set |Resource Group |1-80 |Case insensitive |Alphanumeric, underscore, and hyphen |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Tag |Associated Entity |512 (name), 256 (value) |Case insensitive |Alphanumeric |`"key" : "value"` |`"department" : "Central IT"` |
 
@@ -107,19 +107,26 @@ In general, avoid having any special characters (`-` or `_`) as the first or las
 | --- | --- | --- | --- | --- | --- | --- |
 |Virtual Network (VNet) |Resource Group |2-64 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<service short name>-vnet` |`profx-vnet` |
 |Subnet |Parent VNet |2-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<descriptive context>` |`web` |
-|Network Interface |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Network Interface |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<vmname>-nic<num>` |`profx-sql1-vm1-nic1` |
 |Network Security Group |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Network Security Group Rule |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<descriptive context>` |`sql-allow` |
-|Public IP Address |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Public IP Address |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<vm or service name>-pip` |`profx-sql1-vm1-pip` |
 |Load Balancer |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<service or role>-lb` |`profx-lb` |
 |Load Balanced Rules Config |Load Balancer |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<descriptive context>` |`http` |
 |Azure Application Gateway |Resource Group |1-80 |Case insensitive |Alphanumeric, hyphen, underscore, and period |`<service or role>-agw` |`profx-agw` |
 |Traffic Manager Profile |Resource Group |1-63 |Case insensitive |Alphanumeric, hyphen, and period |`<descriptive context>` |`app1` |
 
+### Containers
+
+| Entity | Scope | Length | Casing | Valid Characters | Suggested Pattern | Example |
+| --- | --- | --- | --- | --- | --- | --- |
+|Container Registry | Global |5-50 |Case insensitive | Alphanumeric |`<service short name>registry` |`app1registry` |
+
+
 ## Organize resources with tags
 
 The Azure Resource Manager supports tagging entities with arbitrary
-text strings to identify context and streamline automation.  For example, the tag `"sqlVersion: "sql2014ee"` could identify VMs in a deployment running SQL Server 2014 Enterprise Edition for running an automated script against them.  Tags should be used to augment and enhance context along side of the naming conventions chosen.
+text strings to identify context and streamline automation.  For example, the tag `"sqlVersion"="sql2014ee"` could identify VMs running SQL Server 2014 Enterprise Edition. Tags should be used to augment and enhance context along side of the naming conventions chosen.
 
 > [!TIP]
 > One other advantage of tags is that tags span resource groups, allowing you to link and correlate entities across disparate deployments.
@@ -166,8 +173,8 @@ There are two primary use cases for storage accounts - backing disks for VMs, an
 
 It's possible to configure a custom domain name for accessing blob data in your Azure Storage account. The default endpoint for the Blob service is https://\<name\>.blob.core.windows.net.
 
-But if you map a custom domain (such as www.contoso.com) to the blob endpoint for your storage account, you can also access blob data in your storage account by using that domain. For example, with a custom domain name, `http://mystorage.blob.core.windows.net/mycontainer/myblob` could be accessed as
-`http://www.contoso.com/mycontainer/myblob`.
+But if you map a custom domain (such as www.contoso.com) to the blob endpoint for your storage account, you can also access blob data in your storage account by using that domain. For example, with a custom domain name, `https://mystorage.blob.core.windows.net/mycontainer/myblob` could be accessed as
+`https://www.contoso.com/mycontainer/myblob`.
 
 For more information about configuring this feature, refer to [Configure a custom domain name for your Blob storage endpoint](/azure/storage/storage-custom-domain-name/).
 
@@ -187,4 +194,4 @@ It is not possible to modify the name of a storage account or container after it
 
 <!-- links -->
 
-[scaffold]: /azure/azure-resource-manager/resource-manager-subscription-governance
+[scaffold]: /azure/architecture/cloud-adoption/appendix/azure-scaffold

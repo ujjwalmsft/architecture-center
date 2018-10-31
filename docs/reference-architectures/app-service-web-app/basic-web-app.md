@@ -120,7 +120,7 @@ For more information, see [Azure Resource Manager overview](/azure/azure-resourc
 ### Deployment
 Deployment involves two steps:
 
-1. Provisioning the Azure resources. We recommend that you use [Azure Resoure Manager templates][arm-template] for this step. Templates make it easier to automate deployments via PowerShell or the Azure command line interface (CLI).
+1. Provisioning the Azure resources. We recommend that you use [Azure Resource Manager templates][arm-template] for this step. Templates make it easier to automate deployments via PowerShell or the Azure command line interface (CLI).
 2. Deploying the application (code, binaries, and content files). You have several options, including deploying from a local Git repository, using Visual Studio, or continuous deployment from cloud-based source control. See [Deploy your app to Azure App Service][deploy].  
 
 An App Service app always has one deployment slot named `production`, which represents the live production site. We recommend creating a staging slot for deploying updates. The benefits of using a staging slot include:
@@ -148,7 +148,7 @@ Enable [diagnostics logging][diagnostic-logs], including application logging and
 
 Use a service such as [New Relic][new-relic] or [Application Insights][app-insights] to monitor application performance and behavior under load. Be aware of the [data rate limits][app-insights-data-rate] for Application Insights.
 
-Perform load testing, using a tool such as [Visual Studio Team Services][vsts]. For a general overview of performance analysis in cloud applications, see [Performance Analysis Primer][perf-analysis].
+Perform load testing, using a tool such as [Azure DevOps][azure-devops] or [Visual Studio Team Foundation Server][tfs]. For a general overview of performance analysis in cloud applications, see [Performance Analysis Primer][perf-analysis].
 
 Tips for troubleshooting your application:
 
@@ -194,7 +194,7 @@ Some limitations of App Service authentication:
 * For multi-tenant scenarios, the application must implement the logic to validate the token issuer.
 
 ## Deploy the solution
-An example Resoure Manager template for this architecture is [available on GitHub][paas-basic-arm-template].
+An example Resource Manager template for this architecture is [available on GitHub][paas-basic-arm-template].
 
 To deploy the template using PowerShell, run the following commands:
 
@@ -220,6 +220,7 @@ For more information, see [Deploy resources with Azure Resource Manager template
 [app-service-security]: /azure/app-service-web/web-sites-security
 [app-settings]: /azure/app-service-web/web-sites-configure
 [arm-template]: /azure/azure-resource-manager/resource-group-overview#resource-groups
+[azure-devops]: /azure/devops/
 [azure-dns]: /azure/dns/dns-overview
 [custom-domain-name]: /azure/app-service-web/web-sites-custom-domain-name
 [deploy]: /azure/app-service-web/web-sites-deploy
@@ -228,7 +229,7 @@ For more information, see [Deploy resources with Azure Resource Manager template
 [diagnostic-logs]: /azure/app-service-web/web-sites-enable-diagnostic-log
 [kudu]: https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/
 [monitoring-guidance]: ../../best-practices/monitoring.md
-[new-relic]: http://newrelic.com/
+[new-relic]: https://newrelic.com/
 [paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/managed-web-app/basic-web-app/Paas-Basic/Templates
 [perf-analysis]: https://github.com/mspnp/performance-optimization/blob/master/Performance-Analysis-Primer.md
 [rbac]: /azure/active-directory/role-based-access-control-what-is
@@ -248,9 +249,9 @@ For more information, see [Deploy resources with Azure Resource Manager template
 [sql-resource-limits]: /azure/sql-database/sql-database-resource-limits
 [ssl-cert]: /azure/app-service-web/web-sites-purchase-ssl-web-site
 [troubleshoot-blade]: https://azure.microsoft.com/updates/self-service-troubleshooting-for-app-service-web-apps-customers/
+[tfs]: /tfs/index
 [troubleshoot-web-app]: /azure/app-service-web/web-sites-dotnet-troubleshoot-visual-studio
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
-[vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
 [web-app-autoscale]: /azure/app-service-web/web-sites-scale
 [web-app-backup]: /azure/app-service-web/web-sites-backup
 [web-app-log-stream]: /azure/app-service-web/web-sites-enable-diagnostic-log#streamlogs

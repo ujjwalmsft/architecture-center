@@ -2,7 +2,7 @@
 title: Disaster recovery for Azure applications
 description: Technical overview and in-depth information about designing applications for disaster recovery on Microsoft Azure.
 author: adamglick
-ms.date: 05/26/2017
+ms.date: 09/12/2018
 ---
 
 # Disaster recovery for Azure applications
@@ -113,6 +113,9 @@ You can also use a more manual approach for backup and restore. Use the DATABASE
 
 The built-in redundancy of Azure Storage creates two replicas of the backup file in the same region. However, the frequency of running the backup process determines your RPO, which is the amount of data you might lose in disaster scenarios. For example, imagine that you perform a backup at the top of each hour, and a disaster occurs two minutes before the top of the hour. You lose 58 minutes of data recorded after the last backup was performed. Also, to protect against a region-wide service disruption, you should copy the BACPAC files to an alternate region. You then have the option of restoring those backups in the alternate region. For more details, see [Overview: Cloud business continuity and database disaster recovery with SQL Database](/azure/sql-database/sql-database-business-continuity/).
 
+#### SQL Data Warehouse
+For SQL Data Warehouse, use [geo-backups](/azure/sql-data-warehouse/backup-and-restore#geo-backups) to restore to a paired region for disaster recovery. These backups are taken every 24 hours and can be restore within 20 minutes in the paired region. This feature is on by default for all SQL data warehouses. For more information on how to restore your data warehouse, see [Restore from an Azure geographical region using PowerShell](/azure/sql-data-warehouse/sql-data-warehouse-restore#restore-from-an-azure-geographical-region-using-powershell).
+
 #### Azure Storage
 For Azure Storage, you can develop a custom backup process or use one of many third-party backup tools. Note that most application designs have additional complexities where storage resources reference each other. For example, consider a SQL database that has a column that links to a blob in Azure Storage. If the backups do not happen simultaneously, the database might have a pointer to a blob that was not backed up before the failure. The application or disaster recovery plan must implement processes to handle this inconsistency after a recovery.
 
@@ -122,7 +125,7 @@ Other infrastructure-as-a-service (IaaS) hosted data platforms, such as Elastics
 ### Reference data pattern for disaster recovery
 Reference data is read-only data that supports application functionality. It typically does not change frequently. Although backup and restore is one method to handle region-wide service disruptions, the RTO is relatively long. When you deploy the application to a secondary region, some strategies can improve the RTO for reference data.
 
-Because reference data changes infrequently, you can improve the RTO by maintaining a permanent copy of the reference data in the secondary region. This eliminates the time required to restore backups in the event of a disaster. To meet the multiple-region disaster recovery requirements, you must deploy the application and the reference data together in multiple regions. As mentioned in [Reference data pattern for high availability](high-availability-azure-applications.md#reference-data-pattern-for-high-availability), you can deploy reference data to the role itself, to external storage, or to a combination of both.
+Because reference data changes infrequently, you can improve the RTO by maintaining a permanent copy of the reference data in the secondary region. This eliminates the time required to restore backups in the event of a disaster. To meet the multiple-region disaster recovery requirements, you must deploy the application and the reference data together in multiple regions. You can deploy reference data to the role itself, to external storage, or to a combination of both.
 
 The reference data deployment model within compute nodes implicitly satisfies the disaster recovery requirements. Reference data deployment to SQL Database requires that you deploy a copy of the reference data to each region. The same strategy applies to Azure Storage. You must deploy a copy of any reference data that's stored in Azure Storage to the primary and secondary regions.
 
@@ -148,7 +151,7 @@ One potential implementation might make use of the intermediate queue in the pre
 
 > [!NOTE]
 > Most of this paper focuses on platform as a service (PaaS). However, additional replication and availability options for hybrid applications use Azure Virtual Machines. These hybrid applications use infrastructure as a service (IaaS) to host SQL Server on virtual machines in Azure. This allows traditional availability approaches in SQL Server, such as AlwaysOn Availability Groups or Log Shipping. Some techniques, such as AlwaysOn, work only between on-premises SQL Server instances and Azure virtual machines. For more information, see [High availability and disaster recovery for SQL Server in Azure Virtual Machines](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
-> 
+>
 > 
 
 #### Reduced application functionality for transaction capture
@@ -273,7 +276,7 @@ Test your scripts repeatedly from start to finish. After verifying their basic f
 A best practice with automation is to create a repository of PowerShell scripts or command-line interface (CLI) scripts for Azure disaster recovery. Clearly mark and categorize them for quick access. Designate a primary person to manage the repository and versioning of the scripts. Document them well with explanations of parameters and examples of script use. Also ensure that you keep this documentation in sync with your Azure deployments. This underscores the purpose of having a primary person in charge of all parts of the repository.
 
 ## Failure detection
-To correctly handle problems with availability and disaster recovery, you must be able to detect and diagnose failures. Perform advanced server and deployment monitoring to quickly recognize when a system or its components suddenly become unavailable. Monitoring tools that assess the overall health of the cloud service and its dependencies can perform part of this work. One suitable Microsoft tool is [System Center 2016](https://www.microsoft.com/server-cloud/products/system-center-2016/). Third-party tools can also provide monitoring capabilities. Most monitoring solutions track key performance counters and service availability.
+To correctly handle problems with availability and disaster recovery, you must be able to detect and diagnose failures. Perform advanced server and deployment monitoring to quickly recognize when a system or its components suddenly become unavailable. Monitoring tools that assess the overall health of the cloud service and its dependencies can perform part of this work. One suitable Microsoft tool is [System Center 2016](https://www.microsoft.com/cloud-platform/system-center). Third-party tools can also provide monitoring capabilities. Most monitoring solutions track key performance counters and service availability.
 
 Although these tools are vital, you must plan for fault detection and reporting within a cloud service. You must also plan to properly use Azure Diagnostics. Custom performance counters or event-log entries can also be part of the overall strategy. This provides more data during failures to quickly diagnose the problem and restore full capabilities. It also provides additional metrics that the monitoring tools can use to determine application health. For more information, see [Enabling Azure Diagnostics in Azure Cloud Services](/azure/cloud-services/cloud-services-dotnet-diagnostics/). For a discussion of how to plan for an overall “health model,” see [Failsafe: Guidance for Resilient Cloud Architectures](https://channel9.msdn.com/Series/FailSafe).
 
@@ -294,11 +297,13 @@ The following topics describe disaster recovery specific Azure services:
 
 | Service | Topic |
 |---------|-------|
+| Azure Database for MySQL | [Overview of business continuity with Azure Database for MySQL](/azure/mysql/concepts-business-continuity) |
+| Azure Database for PostgreSQL | [Overview of business continuity with Azure Database for PostgreSQL](/azure/postgresql/concepts-business-continuity)
 | Cloud Services | [What to do in the event of an Azure service disruption that impacts Azure Cloud Services](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
+| Cosmos DB | [Automatic regional failover for business continuity in Azure Cosmos DB](/azure/cosmos-db/regional-failover)
 | Key Vault | [Azure Key Vault availability and redundancy](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Storage | [What to do if an Azure Storage outage occurs](/azure/storage/storage-disaster-recovery-guidance) |
 | SQL Database | [Restore an Azure SQL Database or failover to a secondary](/azure/sql-database/sql-database-disaster-recovery) |
 | Virtual machines | [What to do in the event that an Azure service disruption impacts Azure virtual machines](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |
 | Virtual networks | [Virtual Network – Business Continuity](/azure/virtual-network/virtual-network-disaster-recovery-guidance) |
-
 
