@@ -1,9 +1,14 @@
 ---
 title: Synchronous I/O antipattern
 description: Blocking the calling thread while I/O completes can reduce performance and affect vertical scalability.
-author: dragon119
+ms.author: pnp
+author: claytonsiemens77
 ms.date: 06/05/2017
+ms.topic: design-pattern
+ms.subservice: best-practice
 ---
+
+<!-- cSpell:ignore uploadedfiles myblob -->
 
 # Synchronous I/O antipattern
 
@@ -22,9 +27,9 @@ Common examples of I/O include:
 
 This antipattern typically occurs because:
 
-- It appears to be the most intuitive way to perform an operation. 
+- It appears to be the most intuitive way to perform an operation.
 - The application requires a response from a request.
-- The application uses a library that only provides synchronous methods for I/O. 
+- The application uses a library that only provides synchronous methods for I/O.
 - An external library performs synchronous I/O operations internally. A single synchronous I/O call can block an entire call chain.
 
 The following code uploads a file to Azure blob storage. There are two places where the code blocks waiting for synchronous I/O, the `CreateIfNotExists` method and the `UploadFromStream` method.
@@ -68,11 +73,9 @@ public class SyncController : ApiController
 }
 ```
 
-You can find the complete code for both of these examples [here][sample-app].
-
 ## How to fix the problem
 
-Replace synchronous I/O operations with asynchronous operations. This frees the current thread to continue performing meaningful work rather than blocking, and helps improve the utilization of compute resources. Performing I/O asynchronously is particularly efficient for handling an unexpected surge in requests from client applications. 
+Replace synchronous I/O operations with asynchronous operations. This frees the current thread to continue performing meaningful work rather than blocking, and helps improve the utilization of compute resources. Performing I/O asynchronously is particularly efficient for handling an unexpected surge in requests from client applications.
 
 Many libraries provide both synchronous and asynchronous versions of methods. Whenever possible, use the asynchronous versions. Here is the asynchronous version of the previous example that uploads a file to Azure blob storage.
 
@@ -110,7 +113,7 @@ public class AsyncController : ApiController
         _userProfileService = new FakeUserProfileService();
     }
 
-    // This is an synchronous method that calls the Task based GetUserProfileAsync method.
+    // This is a synchronous method that calls the Task based GetUserProfileAsync method.
     public Task<UserProfile> GetUserProfileAsync()
     {
         return _userProfileService.GetUserProfileAsync();
@@ -139,13 +142,13 @@ await LibraryIOOperationAsync();
 
 ## Considerations
 
-- I/O operations that are expected to be very short lived and are unlikely to cause contention might be more performant as synchronous operations. An example might be reading small files on an SSD drive. The overhead of dispatching a task to another thread, and synchronizing with that thread when the task completes, might outweigh the benefits of asynchronous I/O. However, these cases are relatively rare, and most I/O operations should be done asynchronously.
+- I/O operations that are expected to be very short lived and are unlikely to cause contention might be more performant as synchronous operations. An example might be reading small files on a solid-state drive (SSD) drive. The overhead of dispatching a task to another thread, and synchronizing with that thread when the task completes, might outweigh the benefits of asynchronous I/O. However, these cases are relatively rare, and most I/O operations should be done asynchronously.
 
 - Improving I/O performance may cause other parts of the system to become bottlenecks. For example, unblocking threads might result in a higher volume of concurrent requests to shared resources, leading in turn to resource starvation or throttling. If that becomes a problem, you might need to scale out the number of web servers or partition data stores to reduce contention.
 
 ## How to detect the problem
 
-For users, the application may seem unresponsive or appear to hang periodically. The application might fail with timeout exceptions. These failures could also return HTTP 500 (Internal Server) errors. On the server, incoming client requests might be blocked until a thread becomes available, resulting in excessive request queue lengths, manifested as HTTP 503 (Service Unavailable) errors.
+For users, the application may seem unresponsive periodically. The application might fail with timeout exceptions. These failures could also return HTTP 500 (Internal Server) errors. On the server, incoming client requests might be blocked until a thread becomes available, resulting in excessive request queue lengths, manifested as HTTP 503 (Service Unavailable) errors.
 
 You can perform the following steps to help identify the problem:
 
@@ -161,7 +164,7 @@ The following sections apply these steps to the sample application described ear
 
 ### Monitor web server performance
 
-For Azure web applications and web roles, it's worth monitoring the performance of the IIS web server. In particular, pay attention to the request queue length to establish whether requests are being blocked waiting for available threads during periods of high activity. You can gather this information by enabling Azure diagnostics. For more information, see:
+For Azure web applications and web roles, it's worth monitoring the performance of the Internet Information Services (IIS) web server. In particular, pay attention to the request queue length to establish whether requests are being blocked waiting for available threads during periods of high activity. You can gather this information by enabling Azure Diagnostics. For more information, see:
 
 - [Monitor Apps in Azure App Service][web-sites-monitor]
 - [Create and use performance counters in an Azure application][performance-counters]
@@ -186,20 +189,11 @@ The next graph shows the results from load testing the asynchronous version of t
 
 ![Performance chart for the sample application performing asynchronous I/O operations][async-performance]
 
-Throughput is far higher. Over the same duration as the previous test, the
-system successfully handles a nearly tenfold increase in throughput, as measured in
-requests per second. Moreover, the average response time is relatively constant and remains approximately 25 times smaller than the previous test.
+Throughput is far higher. Over the same duration as the previous test, the system successfully handles a nearly tenfold increase in throughput, as measured in requests per second. Moreover, the average response time is relatively constant and remains approximately 25 times smaller than the previous test.
 
-
-[sample-app]: https://github.com/mspnp/performance-optimization/tree/master/SynchronousIO
-
-
-[async-wrappers]: https://blogs.msdn.microsoft.com/pfxteam/2012/03/24/should-i-expose-asynchronous-wrappers-for-synchronous-methods/
+[async-wrappers]: https://blogs.msdn.microsoft.com/pfxteam/2012/03/24/should-i-expose-asynchronous-wrappers-for-synchronous-methods
 [performance-counters]: /azure/cloud-services/cloud-services-dotnet-diagnostics-performance-counters
 [web-sites-monitor]: /azure/app-service-web/web-sites-monitor
 
-[sync-performance]: _images/SyncPerformance.jpg
-[async-performance]: _images/AsyncPerformance.jpg
-
-
-
+[sync-performance]: ./_images/SyncPerformance.jpg
+[async-performance]: ./_images/AsyncPerformance.jpg

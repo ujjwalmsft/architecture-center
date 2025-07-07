@@ -132,7 +132,7 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-# TODO: Comment the next line if you want to checkin your web deploy settings 
+# TODO: Comment the next line if you want to checkin your web deploy settings
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
 *.publishproj
@@ -205,6 +205,8 @@ FakesAssemblies/
 *.ConsoleHost.config
 settings.config
 
+*.code-workspace
+
 #Java
 
 *.class
@@ -229,5 +231,23 @@ obj/
 _site/
 .optemp/
 _themes*/
-
 .openpublishing.buildcore.ps1
+/_model
+/_viewmodel
+
+
+# MacOS
+.DS_Store
+
+# Local development
+.cspell.json
+*.bak
+.vscode/*
+*/.vscode/*
+.vscode/settings.json
+.vscode/settings.json
+docs/.vscode/settings.json
+.gitignore
+.temp
+.env
+

@@ -1,144 +1,191 @@
 ---
-title: Online analytical processing (OLAP)
-description: 
-author: zoinerTejada
-ms:date: 02/12/2018
+title: Online Analytical Processing
+description: Learn about online analytical processing solutions to organize large databases and support complex analysis without affecting transactional systems.
+author: amattas
+ms.author: amattas
+ms.date: 04/11/2025
+ms.topic: conceptual
+ms.subservice: architecture-guide
+ms.custom: arb-data
 ---
 
-# Online analytical processing (OLAP)
+# Online analytical processing
 
-Online analytical processing (OLAP) is a technology that organizes large business databases and supports complex analysis. It can be used to perform complex analytical queries without negatively affecting transactional systems.
+Online analytical processing (OLAP) is a technology that organizes large business databases to perform complex calculations and trend analysis. This method enables intricate queries without disrupting transactional systems.
 
-The databases that a business uses to store all its transactions and records are called [online transaction processing (OLTP)](online-transaction-processing.md) databases. These databases usually have records that are entered one at a time. Often they contain a great deal of information that is valuable to the organization. The databases that are used for OLTP, however, were not designed for analysis. Therefore, retrieving answers from these databases is costly in terms of time and effort. OLAP systems were designed to help extract this business intelligence information from the data in a highly performant way. This is because OLAP databases are optimized for heavy read, low write workloads.
+Business transactions and records are stored in databases known as *online transaction processing (OLTP) databases*, which are optimized for individual record entries. These databases hold valuable information, but they're not designed for analysis, so data retrieval is time-consuming and difficult.
 
-![OLAP in Azure](../images/olap-data-pipeline.png) 
+To address this problem, OLAP systems efficiently extract business intelligence from data. OLAP databases are optimized for heavy-read and low-write tasks. They're modeled and cleansed for effective analysis. OLAP databases often preserve historical data for time-series analysis.
+
+OLAP systems traditionally use multidimensional data cubes to organize data in a way that supports complex queries and analysis. The following diagram shows a traditional OLAP system architecture.
+
+:::image type="complex" source="../images/olap-data-pipeline.svg" lightbox="../images/olap-data-pipeline.svg" alt-text="Diagram that shows a traditional OLAP logical architecture in Azure that uses Analysis Services." border="false":::
+This diagram shows a flow from the client applications, to the OLTP system, to the OLAP system, and finally to analytics and reporting. The client applications contain web apps, API apps, and logic apps. The OLTP system contains SQL Database, SQL Server on VMs, Azure Database for MySQL, and Azure Database for PostgreSQL. The OLAP system contains Azure Analysis Services. Analytics and reporting contains Power BI and SQL Server reporting services. Orchestration runs along the bottom of the OLTP system and the OLAP system. It contains SQL Server Integration Services and Azure Data Factory.
+:::image-end:::
+
+As technology progresses and both data and computation scales increase, OLAP systems transition to massively parallel processing (MPP) architectures that [Microsoft Fabric](/fabric/get-started/microsoft-fabric-overview) supports. For more information, see [Fabric analytical data store](https://techcommunity.microsoft.com/blog/analyticsonazure/decision-guide-for-selecting-an-analytical-data-store-in-microsoft-fabric/4362079).
+
+The following diagram shows a modern OLAP system architecture.
+
+:::image type="complex" source="../images/olap-fabric.svg" lightbox="../images/olap-fabric.svg" alt-text="Diagram that shows a modern OLAP logical architecture in Azure that uses Fabric." border="false":::
+This diagram shows a flow from the client application, to the OLTP system, to the OLAP system - Fabric. The client application contains web apps, API apps, and logic apps. The OLTP system contains on-premises databases, Azure databases, Azure Database for MySQL, and Azure Database for PostgreSQL. The OLAP system contains One Lake and Power BI. Orchestration runs along the bottom of the OLTP systems and is integrated with the OLAP system. It contains Azure Data Factory.
+:::image-end:::
 
 ## Semantic modeling
 
-A semantic data model is a conceptual model that describes the meaning of the data elements it contains. Organizations often have their own terms for things, sometimes with synonyms, or even different meanings for the same term. For example, an inventory database might track a piece of equipment with an asset ID and a serial number, but a sales database might refer to the serial number as the asset ID. There is no simple way to relate these values without a model that describes the relationship. 
+A semantic data model is a conceptual model that describes the meaning of the data elements that it contains. Organizations often have their own terms for items, and sometimes those terms have synonyms. Organizations might also have different meanings for the same term. For example, an inventory database might track a piece of equipment by using an asset ID and a serial number. But a sales database might refer to the serial number as the asset ID. There's no simple way to relate these values without a model that describes the relationship.
 
-Semantic modeling provides a level of abstraction over the database schema, so that users don't need to know the underlying data structures. This makes it easier for end users to query data without performing aggregates and joins over the underlying schema. Also, usually columns are renamed to more user-friendly names, so that the context and meaning of the data are more obvious.
+Semantic modeling provides a level of abstraction over the database schema so that users don't need to know the underlying data structures. End users can easily query data without performing aggregates and joins over the underlying schema. Columns are often renamed to more user-friendly names to make the context and meaning of the data more obvious.
 
-Semantic modeling is predominately used for read-heavy scenarios, such as analytics and business intelligence (OLAP), as opposed to more write-heavy transactional data processing (OLTP). This is mostly due to the nature of a typical semantic layer:
+Semantic modeling is predominately for read-heavy scenarios, such as analytics and business intelligence (OLAP), rather than more write-heavy transactional data processing (OLTP). Semantic modeling suits read-heavy scenarios because of the characteristics of a typical semantic layer:
 
 - Aggregation behaviors are set so that reporting tools display them properly.
 - Business logic and calculations are defined.
 - Time-oriented calculations are included.
-- Data is often integrated from multiple sources. 
+- Data is often integrated from multiple sources.
+- Real-time analytics are supported.
 
 Traditionally, the semantic layer is placed over a data warehouse for these reasons.
 
-![Example diagram of a semantic layer between a data warehouse and a reporting tool](../images/semantic-modeling.png)
+:::image type="complex" source="../images/semantic-modeling.png" lightbox="../images/semantic-modeling.png" alt-text="Diagram that shows a semantic layer between a data warehouse and a reporting tool." border="false":::
+The diagram flow starts at source data. The source data goes to the data warehouse, to the semantic layer, and then to reporting and analysis. The semantic layer contains the data model, calculations, and relationships. 
+:::image-end:::
 
 There are two primary types of semantic models:
 
-* **Tabular**. Uses relational modeling constructs (model, tables, columns). Internally, metadata is inherited from OLAP modeling constructs (cubes, dimensions, measures). Code and script use OLAP metadata.
-* **Multidimensional**. Uses traditional OLAP modeling constructs (cubes, dimensions, measures).
+- **Tabular models** use relational modeling constructs, such as models, tables, and columns. Internally, metadata is inherited from OLAP modeling constructs, such as cubes, dimensions, and measures. Code and script use OLAP metadata.
 
-Relevant Azure service:
-- [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/)
+- **Multidimensional models** use traditional OLAP modeling constructs, such as cubes, dimensions, and measures.
+
+[Analysis Services](https://azure.microsoft.com/services/analysis-services/) and [Fabric](/fabric/get-started/microsoft-fabric-overview) provide the necessary infrastructure and tools to implement semantic modeling effectively.
 
 ## Example use case
 
-An organization has data stored in a large database. It wants to make this data available to business users and customers to create their own reports and do some analysis. One option is just to give those users direct access to the database. However, there are several drawbacks to doing this, including managing security and controlling access. Also, the design of the database, including the names of tables and columns, may be hard for a user to understand. Users would need to know which tables to query, how those tables should be joined, and other business logic that must be applied to get the correct results. Users would also need to know a query language like SQL even to get started. Typically this leads to multiple users reporting the same metrics but with different results.
+An organization stores data in a large database. It wants to make this data available to business users and customers to create their own reports and do analysis.
 
-Another option is to encapsulate all of the information that users need into a semantic model. The semantic model can be more easily queried by users with a reporting tool of their choice. The data provided by the semantic model is pulled from a data warehouse, ensuring that all users see a single version of the truth. The semantic model also provides friendly table and column names, relationships between tables, descriptions, calculations, and row-level security.
+They could give those users direct access to the database, but this option has drawbacks, including security management and access control. And users might have difficulty understanding the design of the database, including the names of tables and columns. This option requires users to know which tables to query, how those tables should be joined, and how to apply other business logic to get the correct results. Users also need to know a query language like SQL. Typically, this option leads to multiple users reporting the same metrics but with different results.
+
+A better option is to encapsulate all the information that users need into a semantic model. Users can more easily query the semantic model by using a reporting tool of their choice. The data that the semantic model provides comes from a data warehouse, which ensures that all users view a single source of truth. The semantic model also provides user-friendly table and column names, defines relationships between tables, includes descriptions and calculations, and enforces row-level security.
 
 ## Typical traits of semantic modeling
 
-Semantic modeling and analytical processing tends to have the following traits:
+Semantic modeling and analytical processing tends to have the following traits.
 
 | Requirement | Description |
 | --- | --- |
 | Schema | Schema on write, strongly enforced|
-| Uses Transactions | No |
-| Locking Strategy | None |
-| Updateable | No (typically requires recomputing cube) |
-| Appendable | No (typically requires recomputing cube) |
+| Uses transactions | No |
+| Locking strategy | None |
+| Updateable | No, typically requires recomputing cube |
+| Appendable | No, typically requires recomputing cube |
 | Workload | Heavy reads, read-only |
 | Indexing | Multidimensional indexing |
-| Datum size | Small to medium sized |
-| Model | Multidimensional |
-| Data shape:| Cube or star/snowflake schema |
+| Datum size | Small to massively large size |
+| Model | Tabular or multidimensional |
+| Data shape | Cube, star, or snowflake schema |
 | Query flexibility | Highly flexible |
-| Scale: | Large (10s-100s GBs) |
+| Scale | Large, hundreds of gigabytes (GBs) to multiple petabytes (PBs) |
 
 ## When to use this solution
 
-Consider OLAP in the following scenarios:
+Consider using OLAP for the following scenarios:
 
-- You need to execute complex analytical and ad hoc queries rapidly, without negatively affecting your OLTP systems. 
-- You want to provide business users with a simple way to generate reports from your data
-- You want to provide a number of aggregations that will allow users to get fast, consistent results. 
+- You need to run complex analytical and on-demand queries rapidly, without negatively affecting your OLTP systems.
 
-OLAP is especially useful for applying aggregate calculations over large amounts of data. OLAP systems are optimized for read-heavy scenarios, such as analytics and business intelligence. OLAP allows users to segment multi-dimensional data into slices that can be viewed in two dimensions (such as a pivot table) or filter the data by specific values. This process is sometimes called "slicing and dicing" the data, and can be done regardless of whether the data is partitioned across several data sources. This helps users to find trends, spot patterns, and explore the data without having to know the details of traditional data analysis.
+- You want to provide business users with a simple way to generate reports from your data.
+- You want to provide several aggregations that allow users to get fast, consistent results.
+
+OLAP is especially useful for applying aggregate calculations over large amounts of data. OLAP systems are optimized for read-heavy scenarios. OLAP also allows users to segment multidimensional data into slices that they can view in two dimensions, such as a pivot table. Or they can filter the data by specific values. Users can do these processes, known as *slicing and dicing* the data, regardless of whether the data is partitioned across several data sources. Users can easily explore the data without knowing the details of traditional data analysis.
 
 Semantic models can help business users abstract relationship complexities and make it easier to analyze data quickly.
 
 ## Challenges
 
-For all the benefits OLAP systems provide, they do produce a few challenges:
+OLAP systems also produce challenges:
 
-- Whereas data in OLTP systems is constantly updated through transactions flowing in from various sources, OLAP data stores are typically refreshed at a much slower intervals, depending on business needs. This means OLAP systems are better suited for strategic business decisions, rather than immediate responses to changes. Also, some level of data cleansing and orchestration needs to be planned to keep the OLAP data stores up-to-date.
-- Unlike traditional, normalized, relational tables found in OLTP systems, OLAP data models tend to be multidimensional. This makes it difficult or impossible to directly map to entity-relationship or object-oriented models, where each attribute is mapped to one column. Instead, OLAP systems typically use a star or snowflake schema in place of traditional normalization.
+- Transactions that flow in from various sources constantly update data in OLTP systems. OLAP data stores typically refresh at much slower intervals, depending on business needs. OLAP systems suit strategic business decisions, rather than immediate responses to changes. You must also plan some level of data cleansing and orchestration to keep the OLAP data stores up-to-date.
+
+- Unlike traditional, normalized relational tables in OLTP systems, OLAP data models tend to be multidimensional. So it's difficult or impossible to directly map them to entity-relationship or object-oriented models, where each attribute corresponds to one column. Instead, OLAP systems typically use a star or snowflake schema instead of traditional normalization.
 
 ## OLAP in Azure
 
-In Azure, data held in OLTP systems such as Azure SQL Database is copied into the OLAP system, such as [Azure Analysis Services](/azure/analysis-services/analysis-services-overview). Data exploration and visualization tools like [Power BI](https://powerbi.microsoft.com), Excel, and third-party options connect to Analysis Services servers and provide users with highly interactive and visually rich insights into the modeled data. The flow of data from OLTP data to OLAP is typically orchestrated using SQL Server Integration Services, which can be executed using [Azure Data Factory](/azure/data-factory/concepts-integration-runtime).
+In Azure, data in OLTP systems, such as Azure SQL Database, is copied into OLAP systems like [Fabric](/fabric/get-started/microsoft-fabric-overview) or [Analysis Services](/azure/analysis-services/). Data exploration and visualization tools like [Power BI](https://powerbi.microsoft.com), Excel, and non-Microsoft options connect to Analysis Services servers and provide users with highly interactive and visually rich insights into the modeled data. You can use SQL Server Integration Services to orchestrate the flow of data from OLTP systems to OLAP systems. To implement SQL Server Integration Services, use [Azure Data Factory](/azure/data-factory/concepts-integration-runtime).
 
-In Azure, all of the following data stores will meet the core requirements for OLAP:
+The following Azure data stores meet the core requirements for OLAP:
 
-- [SQL Server with Columnstore indexes](/sql/relational-databases/indexes/get-started-with-columnstore-for-real-time-operational-analytics)
-- [Azure Analysis Services](/azure/analysis-services/analysis-services-overview)
-- [SQL Server Analysis Services (SSAS)](/sql/analysis-services/analysis-services)
+- [Fabric](/fabric/get-started/microsoft-fabric-overview)
+- [SQL Server with columnstore indexes](/sql/relational-databases/indexes/columnstore-indexes-overview)
+- [Analysis Services](/azure/analysis-services/)
+- [SQL Server Analysis Services](/analysis-services/ssas-overview)
 
-SQL Server Analysis Services (SSAS) offers OLAP and data mining functionality for business intelligence applications. You can either install SSAS on local servers, or host within a virtual machine in Azure. Azure Analysis Services is a fully managed service that provides the same major features as SSAS. Azure Analysis Services supports connecting to [various data sources](/azure/analysis-services/analysis-services-datasource) in the cloud and on-premises in your organization.
+SQL Server Analysis Services provides OLAP and data-mining functionality for business intelligence applications. You can either install SQL Server Analysis Services on local servers or host it within a virtual machine (VM) in Azure. Analysis Services is a fully managed service that provides the same major features as SQL Server Analysis Services. Analysis Services supports connecting to [various data sources](/azure/analysis-services/analysis-services-datasource) in the cloud and on-premises in your organization.
 
-Clustered Columnstore indexes are available in SQL Server 2014 and above, as well as Azure SQL Database, and are ideal for OLAP workloads. However, beginning with SQL Server 2016 (including Azure SQL Database), you can take advantage of hybrid transactional/analytics processing (HTAP) through the use of updateable nonclustered columnstore indexes. HTAP enables you to perform OLTP and OLAP processing on the same platform, which removes the need to store multiple copies of your data, and eliminates the need for distinct OLTP and OLAP systems. For more information, see [Get started with Columnstore for real-time operational analytics](/sql/relational-databases/indexes/get-started-with-columnstore-for-real-time-operational-analytics).
+Clustered columnstore indexes are available in SQL Server 2014 and higher and in SQL Database. These indexes are ideal for OLAP workloads. Beginning with SQL Server 2016, including SQL Database, you can take advantage of hybrid transactional and analytical processing (HTAP) through updateable nonclustered columnstore indexes. Use HTAP to perform OLTP and OLAP processing on the same platform. This approach eliminates the need for multiple copies of your data and separate OLTP and OLAP systems. For more information, see [Columnstore for real-time operational analytics](/sql/relational-databases/indexes/get-started-with-columnstore-for-real-time-operational-analytics).
 
 ## Key selection criteria
 
-To narrow the choices, start by answering these questions:
+To narrow the choices, answer the following questions:
 
-- Do you want a managed service rather than managing your own servers?
+- **Do you want a managed service rather than managing your own servers?**
 
-- Do you require secure authentication using Azure Active Directory (Azure AD)?
+- **Do you require Microsoft Entra ID for secure authentication?**
 
-- Do you want to conduct real-time analytics? If so, narrow your options to those that support real-time analytics. 
+- **Do you need to integrate data from several sources, beyond your OLTP data store?**
 
-    *Real-time analytics* in this context applies to a single data source, such as an enterprise resource planning (ERP) application, that will run both an operational and an analytics workload. If you need to integrate data from multiple sources, or require extreme analytics performance by using pre-aggregated data such as cubes, you might still require a separate data warehouse.
+- **Do you want to conduct real-time analytics?**
 
-- Do you need to use pre-aggregated data, for example to provide semantic models that make analytics more business user friendly? If yes, choose an option that supports multidimensional cubes or tabular semantic models. 
+  [Fabric Real-Time Intelligence](/fabric/real-time-intelligence/overview) is a powerful service within Fabric that you can use to extract insights and visualize your data in motion. It provides an end-to-end solution for event-driven scenarios, streaming data, and data logs. Whether you manage GBs or PBs of data, all organizational data in motion converges in the Real-Time hub.
 
-    Providing aggregates can help users consistently calculate data aggregates. Pre-aggregated data can also provide a large performance boost when dealing with several columns across many rows. Data can be pre-aggregated in multidimensional cubes or tabular semantic models.
+- **Do you need to use pre-aggregated data, for example to provide semantic models that make analytics easier for business users?**
 
-- Do you need to integrate data from several sources, beyond your OLTP data store? If so, consider options that easily integrate multiple data sources.
+  If yes, choose an option that supports multidimensional cubes or tabular semantic models.
+
+  Provide aggregates to help users consistently calculate data aggregates. Pre-aggregated data can also provide a large performance boost if you have several columns across many rows. You can pre-aggregate data in multidimensional cubes or tabular semantic models.
 
 ## Capability matrix
 
-The following tables summarize the key differences in capabilities.
+The following tables summarize the key differences in capabilities between these services:
+- Fabric
+- Analysis Services
+- SQL Server Analysis Services
+- SQL Server with columnstore indexes
+- SQL Database with columnstore indexes
 
 ### General capabilities
 
-| | Azure Analysis Services | SQL Server Analysis Services | SQL Server with Columnstore Indexes | Azure SQL Database with Columnstore Indexes |
-| --- | --- | --- | --- | --- |
-| Is managed service | Yes | No | No | Yes |
-| Supports multidimensional cubes | No | Yes | No | No |
-| Supports tabular semantic models | Yes | Yes | No | No |
-| Easily integrate multiple data sources | Yes | Yes | No <sup>1</sup> | No <sup>1</sup> |
-| Supports real-time analytics | No | No | Yes | Yes |
-| Requires process to copy data from source(s) | Yes | Yes | No | No |
-| Azure AD integration | Yes | No | No <sup>2</sup> | Yes |
+| Capability | Fabric | Analysis Services | SQL Server Analysis Services | SQL Server with columnstore indexes | SQL Database with columnstore indexes |
+| --- | --- | --- | --- | --- | --- |
+| Is a managed service | Yes | Yes | No | No | Yes |
+| MPP | Yes | No | No | No | No |
+| Supports multidimensional cubes | No | No | Yes | No | No |
+| Supports tabular semantic models | Yes |Yes | Yes | No | No |
+| Easily integrates multiple data sources | Yes |Yes | Yes | No <sup>1</sup> | No <sup>1</sup> |
+| Supports real-time analytics | Yes |No | No | Yes | Yes |
+| Requires a process to copy data from sources | Optional&nbsp;<sup>3</sup> | Yes | Yes | No | No |
+| Microsoft Entra integration | Yes |Yes | No | No <sup>2</sup> | Yes |
 
-[1] Although SQL Server and Azure SQL Database cannot be used to query from and integrate multiple external data sources, you can still build a pipeline that does this for you using [SSIS](/sql/integration-services/sql-server-integration-services) or [Azure Data Factory](/azure/data-factory/). SQL Server hosted in an Azure VM has additional options, such as linked servers and [PolyBase](/sql/relational-databases/polybase/polybase-guide). For more information, see [Pipeline orchestration, control flow, and data movement](../technology-choices/pipeline-orchestration-data-movement.md).
+[1] SQL Server and SQL Database can't query from and integrate multiple external data sources, but you can build a pipeline to do these functions by using [SQL Server Integration Services](/sql/integration-services/sql-server-integration-services) or [Azure Data Factory](/azure/data-factory/). Azure VM-hosted SQL Server has more options, such as linked servers and [PolyBase](/sql/relational-databases/polybase/polybase-guide). For more information, see [Choose a data pipeline orchestration technology](../technology-choices/pipeline-orchestration-data-movement.md).
 
-[2] Connecting to SQL Server running on an Azure Virtual Machine is not supported using an Azure AD account. Use a domain Active Directory account instead.
+[2] A Microsoft Entra account doesn't support connecting to Azure VM-hosted SQL Server. Use a domain Windows Server Active Directory account instead.
 
-### Scalability Capabilities
+[3] Fabric provides the flexibility to integrate data sources by moving data into OneLake via Azure Data Factory pipelines or mirroring. You can also create shortcuts or do real-time analytics on data streams without moving the data.
 
-|                                                  | Azure Analysis Services | SQL Server Analysis Services | SQL Server with Columnstore Indexes | Azure SQL Database with Columnstore Indexes |
-|--------------------------------------------------|-------------------------|------------------------------|-------------------------------------|---------------------------------------------|
-| Redundant regional servers for high availability |           Yes           |              No              |                 Yes                 |                     Yes                     |
-|             Supports query scale out             |           Yes           |              No              |                 Yes                 |                     No                      |
-|          Dynamic scalability (scale up)          |           Yes           |              No              |                 Yes                 |                     No                      |
+### Scalability capabilities
 
+| Capability | Fabric | Analysis Services | SQL Server Analysis Services | SQL Server with columnstore indexes | SQL Database with columnstore indexes |
+|-----|--------------------------------------------------|-------------------------|------------------------------|-------------------------------------|---------------------------------------------|
+| Redundant regional servers for high availability | Yes |           Yes           |              No              |                 Yes                 |                     Yes                     |
+|             Supports query scale out             |      Yes |     Yes           |              No              |                 Yes                 |                     Yes                      |
+|          Dynamic scalability, scale up          |  Yes |         Yes           |              No              |                 Yes                 |                     Yes                      |
+
+## Next steps
+
+- [Fabric analytical data store](https://techcommunity.microsoft.com/blog/analyticsonazure/decision-guide-for-selecting-an-analytical-data-store-in-microsoft-fabric/4362079)
+- [Columnstore indexes](/sql/relational-databases/indexes/columnstore-indexes-overview)
+- [Create an Analysis Services server](/azure/analysis-services/analysis-services-create-server)
+- [What is Azure Data Factory?](/azure/data-factory/introduction)
+- [What is Power BI?](/power-bi/fundamentals/power-bi-overview)
+
+## Related resources
+
+- [Big data architecture style](../../guide/architecture-styles/big-data.yml)

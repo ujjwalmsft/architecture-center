@@ -1,0 +1,23 @@
+### YamlMime:Architecture
+metadata:
+  title: Rehost IMS DC and IMS DB on Azure by Using Raincode IMSql  
+  description: Learn how to rehost IBM IMS DC and IMS DB on Azure by using Raincode IMSql. Rehost seamlessly without translating or changing your application.
+  author: amethygeo
+  ms.author: naruldoss
+  ms.date: 02/26/2025
+  ms.topic: example-scenario
+  ms.subservice: example-scenario
+azureCategories:
+  - migration
+  - databases
+products:
+  - azure-vm-scalesets
+  - azure-logic-apps
+  - azure-sql-managed-instance
+  - azure-virtual-network
+  - azure-expressroute
+name: Rehost IMS DC and IMS DB on Azure by using Raincode IMSql 
+summary: Learn how to rehost IBM IMS DC and IMS DB on Azure by using Raincode IMSql. Rehost seamlessly without translating or changing your application.
+thumbnailUrl: /azure/architecture/browse/thumbs/rehost-ims-raincode-imsql.png
+content: |
+  [!INCLUDE[](rehost-ims-raincode-imsql-content.md)]

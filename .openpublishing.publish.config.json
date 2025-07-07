@@ -1,52 +1,73 @@
 {
-  "need_generate_pdf": true,
-  "need_generate_intellisense": false,
   "docsets_to_publish": [
     {
-      "docset_name": "azure-architecture-center",
+      "docset_name": "azure-architecture-center-pr2",
       "build_source_folder": "docs",
-      "build_output_subfolder": "azure-architecture-center",
+      "build_output_subfolder": "azure-architecture-center-pr2",
       "locale": "en-us",
       "monikers": [],
+      "moniker_ranges": [],
       "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
         "ManagedReference": "Content",
-        "RestApi": "Content"
+        "RestApi": "Content",
+        "Architecture": "Content"
       },
       "build_entry_point": "docs",
-      "template_folder": "_themes",
-      "version": 0
+      "template_folder": "_themes"
     }
   ],
   "notification_subscribers": [],
+  "sync_notification_subscribers": [],
   "branches_to_filter": [],
-  "git_repository_url_open_to_public_contributors": "https://github.com/mspnp/architecture-center",
-  "git_repository_branch_open_to_public_contributors": "master",
-  "skip_source_output_uploading": false,
+  "git_repository_url_open_to_public_contributors": "https://github.com/microsoftdocs/architecture-center",
+  "git_repository_branch_open_to_public_contributors": "main",
   "need_preview_pull_request": true,
-  "enable_incremental_build": true,
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
       "url": "https://github.com/Microsoft/templates.docs.msft",
-      "branch": "master",
+      "branch": "main",
       "branch_mapping": {}
     },
     {
       "path_to_root": "_themes.pdf",
       "url": "https://github.com/Microsoft/templates.docs.msft.pdf",
-      "branch": "master",
+      "branch": "main",
+      "branch_mapping": {}
+    },
+    {
+      "path_to_root": "azure-cae-bits",
+      "url": "https://github.com/Azure/CAE-Bits",
+      "branch": "main",
+      "branch_mapping": {}
+    },
+    {
+      "path_to_root": "docs/reusable-content",
+      "url": "https://github.com/MicrosoftDocs/reusable-content",
+      "branch": "main",
       "branch_mapping": {}
     }
   ],
   "branch_target_mapping": {
-    "live": [ "Publish", "PDF" ]
+    "live": [
+      "Publish",
+      "Pdf"
+    ],
+    "main": [
+      "Publish",
+      "Pdf"
+    ]
   },
-  "need_generate_pdf_url_template": true,
-  "Targets": {
-    "Pdf": {
+  "targets": {
+    "PDF": {
       "template_folder": "_themes.pdf"
     }
-  }
+  },
+  "docs_build_engine": {},
+  "skip_source_output_uploading": false,
+  "contribution_branch_mappings": {},
+  "need_generate_pdf": true,
+  "need_generate_pdf_url_template": true
 }

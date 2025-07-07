@@ -1,0 +1,18 @@
+{
+  "Docsets": [
+    {
+      "DocsetName": "azure-architecture-center-pr2",
+      "BuildSourceFolder": "docs"
+    }
+  ],
+  "Exclude": [
+    "SECURITY.md",
+    "docs/_bread/toc.yml"
+  ],
+  "TermFiles": [
+    "Bundle-Standard.txt",
+    "Bundle-Cloud.txt",
+    "Dictionary-EntraRebrand.ps1",
+    "Dictionary-AAC.ps1"
+  ]
+}

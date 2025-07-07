@@ -1,633 +1,180 @@
 ---
 title: Azure for AWS Professionals
-description: Understand the basics of Microsoft Azure accounts, platform, and services. Also learn key similarities and differences between the AWS and Azure platforms. Leverage your AWS experience in Azure. 
-keywords: AWS experts, Azure comparison, AWS comparison, difference between azure and aws, azure and aws
-author: lbrader
-ms.date: 03/24/2017
-
-pnp.series.title: Azure for AWS Professionals
+description: Learn about the basics of the Microsoft Azure platform, accounts, and services. Discover key similarities and differences between the AWS and Azure platforms.
+author: scaryghosts
+ms.author: adamcerini
+ms.date: 02/07/2025
+ms.topic: conceptual
+ms.subservice: architecture-guide
+ms.collection: 
+ - migration
+ - aws-to-azure
 ---
 
-# Azure for AWS Professionals
+# Azure for AWS professionals
+
+This article introduces a series of articles that help Amazon Web Services (AWS) experts understand the basics of the Microsoft Azure platform, accounts, and services. This article describes key similarities and differences between AWS and Azure. Whether you're designing a multicloud solution that uses both Azure and AWS or migrating from AWS to Azure, you can compare the capabilities of Azure and AWS services in all categories.
+
+The articles in this series describe:
+
+- How to think about Azure capabilities from an AWS perspective.
+- How Azure organizes accounts and resources.
+- How core Azure services differ from AWS services and how they're similar.
+
+Use the table of contents to select the technology areas that are relevant to your workload. These articles compare services that are roughly comparable. Not every AWS service or Azure service is listed, and not every matched service has exact feature-for-feature parity.
+
+## Similarities and differences
+
+AWS and Azure build on a core set of AI, compute, storage, database, and networking services. In many cases, the platforms provide similar products and services. For example, both AWS and Azure can use Linux distributions and open-source software technologies. Both platforms support building highly available solutions on Windows or Linux hosts.
 
-This article helps Amazon Web Services (AWS) experts understand the basics of Microsoft Azure accounts, platform, and services. It also covers key similarities and differences between the AWS and Azure platforms.
+The capabilities of both platforms are similar, but the resources that provide those capabilities are often organized differently. Azure and AWS built their capabilities independently over time, so the platforms have important implementation and design differences. For example, AWS relies heavily on its accounts to serve as a logical boundary for tasks like applying permissions or tracking spend. Azure uses subscriptions, which are similar to AWS accounts. Azure also uses resource groups to logically group and manage resources at a more granular level.
+
+The services that each platform provide don't always clearly correspond. Sometimes, only one of the platforms provides a particular service. 
+
+## Primary topics
+
+Read the following articles to learn about Azure services and how they map to the services that you're already familiar with in AWS. The following articles go into more detail about how Azure works in these specific areas:
 
-You'll learn:
-
-* How accounts and resources are organized in Azure.
-* How available solutions are structured in Azure.
-* How the major Azure services differ from AWS services.
-
-Azure and AWS built their capabilities independently over time so that each has important implementation and design differences.
-
-## Overview
-
-Like AWS, Microsoft Azure is built around a core set of compute, storage,
-database, and networking services. In many cases, both platforms offer a basic
-equivalence between the products and services they offer. Both AWS and Azure
-allow you to build highly available solutions based on Windows or Linux hosts. So, if you're used to development using Linux and OSS technology, both platforms
-can do the job.
-
-While the capabilities of both platforms are similar, the resources that provide
-those capabilities are often organized differently. Exact one-to-one
-relationships between the services required to build a solution are not always
-clear. There are also cases where a particular service might be offered on one
-platform, but not the other. See [charts of comparable Azure and AWS services](services.md).
-
-## Accounts and subscriptions
-
-Azure services can be purchased using several pricing options, depending on your
-organization's size and needs. See the [pricing
-overview](https://azure.microsoft.com/pricing/) page for details.
-
-[Azure
-subscriptions](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-infrastructure-subscription-accounts-guidelines/)
-are a grouping of resources with an assigned owner responsible for billing and
-permissions management. Unlike AWS, where any resources created under the AWS
-account are tied to that account, subscriptions exist independently of their
-owner accounts, and can be reassigned to new owners as needed.
-
-![Comparison of structure and ownership of AWS accounts and Azure subscriptions](./images/azure-aws-account-compare.png "Comparison of structure and ownership of AWS accounts and Azure subscriptions")
-<br/>*Comparison of structure and ownership of AWS accounts and Azure subscriptions*
-<br/><br/>
-
-Subscriptions are assigned three types of administrator accounts:
-
--   **Account Administrator** - The subscription owner and the
-    account billed for the resources used in the subscription. The account
-    administrator can only be changed by transferring ownership of the
-    subscription.
-
--   **Service Administrator** - This account has rights to create and manage
-    resources in the subscription, but is not responsible for billing. By
-    default, the account administrator and service administrator are assigned to
-    the same account. The account administrator can assign a separate user to
-    the service administrator account for managing the technical and operational
-    aspects of a subscription. There is only one service administrator per
-    subscription.
-
--   **Co-administrator** - There can be multiple co-administrator accounts
-    assigned to a subscription. Co-administrators cannot change the service
-    administrator, but otherwise have full control over subscription resources
-    and users.
-
-Below the subscription level user roles and individual permissions can also be assigned to specific resources, similarly to how permissions are granted to IAM users and groups in AWS. In Azure all user accounts are associated with either a Microsoft Account or Organizational Account (an account managed through an Azure Active Directory).
-
-Like AWS accounts, subscriptions have default service quotas and limits. For a
-full list of these limits, see [Azure subscription and service limits, quotas,
-and
-constraints](https://azure.microsoft.com/documentation/articles/azure-subscription-service-limits/).
-These limits can be increased up to the maximum by [filing a support request in
-the management
-portal](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/).
-
-### See also
-
--   [How to add or change Azure administrator
-    roles](https://azure.microsoft.com/documentation/articles/billing-add-change-azure-subscription-administrator/)
-
--   [How to download your Azure billing invoice and daily usage
-    data](https://azure.microsoft.com/documentation/articles/billing-download-azure-invoice-daily-usage-date/)
-
-## Resource management
-
-The term "resource" in Azure is used in the same way as in AWS, meaning any
-compute instance, storage object, networking device, or other entity you can
-create or configure within the platform.
-
-Azure resources are deployed and managed using one of two models: [Azure
-Resource Manager](/azure/azure-resource-manager/resource-group-overview), or the older Azure [classic deployment model](/azure/azure-resource-manager/resource-manager-deployment-model).
-Any new resources are created using the Resource Manager model.
-
-### Resource groups
-
-Both Azure and AWS have entities called "resource groups" that organize resources such as VMs, storage, and virtual networking devices. However, [Azure resource groups](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-infrastructure-resource-groups-guidelines/) are not directly comparable to AWS resource groups.
-
-While AWS allows a resource to be tagged into multiple resource groups, an Azure
-resource is always associated with one resource group. A resource created in one
-resource group can be moved to another group, but can only be in one resource
-group at a time. Resource groups are the fundamental grouping used by Azure
-Resource Manager.
-
-Resources can also be organized using
-[tags](https://azure.microsoft.com/documentation/articles/resource-group-using-tags/).
-Tags are key-value pairs that allow you to group resources across your
-subscription irrespective of resource group membership.
-
-### Management interfaces
-
-Azure offers several ways to manage your resources:
-
--   [Web
-    interface](https://azure.microsoft.com/documentation/articles/resource-group-portal/).
-    Like the AWS Dashboard, the Azure portal provides a full web-based
-    management interface for Azure resources.
-
--   [REST
-    API](https://azure.microsoft.com/documentation/articles/resource-manager-rest-api/).
-    The Azure Resource Manager REST API provides programmatic access to most of
-    the features available in the Azure portal.
-
--   [Command
-    Line](https://azure.microsoft.com/documentation/articles/xplat-cli-azure-resource-manager/).
-    The Azure CLI 2.0 tool provides a command-line interface capable of creating and
-    managing Azure resources. Azure CLI is available for [Windows, Linux, and
-    Mac OS](https://aka.ms/azurecli2).
-
--   [PowerShell](https://azure.microsoft.com/documentation/articles/powershell-azure-resource-manager/).
-    The Azure modules for PowerShell allow you to execute automated management
-    tasks using a script. PowerShell is available for [Windows, Linux, and Mac
-    OS](https://github.com/PowerShell/PowerShell).
-
--   [Templates](https://azure.microsoft.com/documentation/articles/resource-group-authoring-templates/).
-    Azure Resource Manager templates provide similar JSON template-based
-    resource management capabilities to the AWS CloudFormation service.
-
-In each of these interfaces, the resource group is central to how Azure
-resources get created, deployed, or modified. This is similar to the role a
-"stack" plays in grouping AWS resources during CloudFormation deployments.
-
-The syntax and structure of these interfaces are different from their AWS
-equivalents, but they provide comparable capabilities. In addition, many third
-party management tools used on AWS, like [Hashicorp's
-Terraform](https://www.terraform.io/docs/providers/azurerm/) and [Netflix
-Spinnaker](https://www.spinnaker.io/), are also available on Azure.
-
-### See also
-
--   [Azure resource group
-    guidelines](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-infrastructure-resource-groups-guidelines/)
-
-## Regions and zones (high availability)
-
-Failures can vary in the scope of their impact. Some hardware failures, such as a failed disk, may affect a single host machine. A failed network switch could affect a whole server rack. Less common are failures that disrupt a whole data center, such as loss of power in a data center. Rarely, an entire region could become unavailable.
-
-One of the main ways to make an application resilient is through redundancy. But you need to plan for this redundancy when you design the application. Also, the level of redundancy that you need depends on your business requirements &mdash; not every application needs redundancy across regions to guard against a regional outage. In general, there is a tradeoff between greater redundancy and reliability versus higher cost and complexity.  
-
-In AWS, a region is divided into two or more Availability Zones. An Availability Zone corresponds with a physically isolated datacenter in the geographic region. Azure has a number of features to make an application redundant at every level of failure, including **availability sets**, **availability zones**, and **paired regions**. 
-
-![](../resiliency/images/redundancy.svg)
-
-The following table summarizes each option.
-
-| &nbsp; | Availability Set | Availability Zone | Paired region |
-|--------|------------------|-------------------|---------------|
-| Scope of failure | Rack | Datacenter | Region |
-| Request routing | Load Balancer | Cross-zone Load Balancer | Traffic Manager |
-| Network latency | Very low | Low | Mid to high |
-| Virtual networking  | VNet | VNet | Cross-region VNet peering |
-
-### Availability sets 
-
-To protect against localized hardware failures, such as a disk or network switch failing, deploy two or more VMs in an availability set. An availability set consists of two or more *fault domains* that share a common power source and network switch. VMs in an availability set are distributed across the fault domains, so if a hardware failure affects one fault domain, network traffic can still be routed the VMs in the other fault domains. For more information about Availability Sets, see [Manage the availability of Windows virtual machines in Azure](/azure/virtual-machines/windows/manage-availability).
-
-When VM instances are added to availability sets, they are also assigned an [update domain](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/). An update domain is a group of VMs that are set for planned maintenance events at the same time. Distributing VMs across multiple update domains ensures that planned update and patching events affect only a subset of these VMs at any given time.
-
-Availability sets should be organized by the instance's role in your application to ensure one instance in each role is operational. For example, in a three-tier web application, create separate availability sets
-for the front-end, application, and data tiers.
-
-![Azure availability sets for each application role](./images/three-tier-example.png "Availability sets for each application role")
-
-### Availability zones
-
-An [Availability Zone](/azure/availability-zones/az-overview) is a physically separate zone within an Azure region. Each Availability Zone has a distinct power source, network, and cooling. Deploying VMs across availability zones helps to protect an application against datacenter-wide failures. 
-
-### Paired regions
-
-To protect an application against a regional outage, you can deploy the application across multiple regions, using [Azure Traffic Manager][traffic-manager] to distribute internet traffic to the different regions. Each Azure region is paired with another region. Together, these form a [regional pair][paired-regions]. With the exception of Brazil South, regional pairs are located within the same geography in order to meet data residency requirements for tax and law enforcement jurisdiction purposes.
-
-Unlike Availability Zones, which are physically separate datacenters but may
-be in relatively nearby geographic areas, paired regions are usually separated
-by at least 300 miles. This is intended to ensure larger scale disasters only impact one of the regions in the pair. Neighboring pairs can be set to sync
-database and storage service data, and are configured so that platform updates
-are rolled out to only one region in the pair at a time.
-
-Azure [geo-redundant
-storage](https://azure.microsoft.com/documentation/articles/storage-redundancy/#geo-redundant-storage)
-is automatically backed up to the appropriate paired region. For all other
-resources, creating a fully redundant solution using paired regions means
-creating a full copy of your solution in both regions.
-
-
-### See also
-
--   [Regions and availability for virtual machines in
-    Azure](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-regions-and-availability/)
-
--   [High availability for Azure applications](../resiliency/high-availability-azure-applications.md)
-
--   [Disaster recovery for Azure applications](../resiliency/disaster-recovery-azure-applications.md)
-
--   [Planned maintenance for Linux virtual machines in
-    Azure](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-planned-maintenance/)
-
-## Services
-
-For a listing of how services map between platforms, see [AWS to Azure services comparison](./services.md).
-
-Not all Azure products and
-services are available in all regions. Consult the [Products by
-Region](https://azure.microsoft.com/regions/services/) page for details. You can find the uptime guarantees and downtime credit policies for each Azure
-product or service on the [Service Level
-Agreements](https://azure.microsoft.com/support/legal/sla/) page.
-
-The following sections provide a brief explanation of how commonly used features and services differ between the AWS and Azure platforms.
-
-### Compute services
-
-#### EC2 Instances and Azure virtual machines
-
-Although AWS instance types and Azure virtual machine sizes breakdown in a
-similar way, there are differences in the RAM, CPU, and storage capabilities.
-
--   [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
-
--   [Sizes for virtual machines in Azure
-    (Windows)](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/)
-
--   [Sizes for virtual machines in Azure
-    (Linux)](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
-
-Unlike AWS' per second billing, Azure on-demand VMs are billed by the minute.
-
-#### EBS and Azure Storage for VM disks
-
-Durable data storage for Azure VMs is provided by [data
-disks](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-about-disks-vhds/)
-residing in blob storage. This is similar to how EC2 instances store disk
-volumes on Elastic Block Store (EBS). [Azure temporary
-storage](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
-also provides VMs the same low-latency temporary read-write storage as EC2
-Instance Storage (also called ephemeral storage).
-
-Higher performance disk IO is supported using [Azure premium
-storage](https://docs.microsoft.com/azure/storage/storage-premium-storage).
-This is similar to the Provisioned IOPS storage options provided by AWS.
-
-#### Lambda, Azure Functions, Azure Web-Jobs, and Azure Logic Apps
-
-[Azure Functions](https://azure.microsoft.com/services/functions/) is the
-primary equivalent of AWS Lambda in providing serverless, on-demand code.
-However, Lambda functionality also overlaps with other Azure services:
-
--   [WebJobs](https://azure.microsoft.com/documentation/articles/web-sites-create-web-jobs/) - allow you to create scheduled or continuously running background tasks.
-
--   [Logic Apps](https://azure.microsoft.com/services/logic-apps/) - provides communications, integration, and business rule management services.
-
-#### Autoscaling, Azure VM scaling, and Azure App Service Autoscale
-
-Autoscaling in Azure is handled by two services:
-
--   [VM scale
-    sets](https://azure.microsoft.com/documentation/articles/virtual-machine-scale-sets-overview/) - allow you to deploy and manage an identical set of VMs. The number of
-    instances can autoscale based on performance needs.
-
--   [App Service
-    Autoscale](https://azure.microsoft.com/documentation/articles/web-sites-scale/) - provides the capability to autoscale Azure App Service solutions.
-
-
-#### Container Service
-The [Azure Container Service](https://docs.microsoft.com/azure/container-service/container-service-intro) supports Docker containers managed through Docker Swarm, Kubernetes, or DC/OS.
-
-#### Other compute services 
-
-
-Azure offers several compute services that do not have direct equivalents in
-AWS:
-
--   [Azure
-    Batch](https://azure.microsoft.com/documentation/articles/batch-technical-overview/) - allows you to manage compute-intensive work across a scalable collection
-    of virtual machines.
-
--   [Service
-    Fabric](https://azure.microsoft.com/documentation/articles/service-fabric-overview/) - platform for developing and hosting scalable
-    [microservice](https://azure.microsoft.com/documentation/articles/service-fabric-overview-microservices/)
-    solutions.
-
-#### See also
-
--   [Create a Linux VM on Azure using the
-    Portal](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-quick-create-portal/)
-
--   [Azure Reference Architecture: Running a Linux VM on
-    Azure](https://azure.microsoft.com/documentation/articles/guidance-compute-single-vm-linux/)
-
--   [Get started with Node.js web apps in Azure App
-    Service](https://azure.microsoft.com/documentation/articles/app-service-web-nodejs-get-started/)
-
--   [Azure Reference Architecture: Basic web
-    application](https://azure.microsoft.com/documentation/articles/guidance-web-apps-basic/)
-
--   [Create your first Azure
-    Function](https://azure.microsoft.com/documentation/articles/functions-create-first-azure-function/)
-
-### Storage
-
-#### S3/EBS/EFS and Azure Storage
-
-In the AWS platform, cloud storage is primarily broken down into three services:
-
--   **Simple Storage Service (S3)** - basic object storage. Makes data available
-    through an Internet accessible API.
-
--   **Elastic Block Storage (EBS)** - block level storage, intended for access
-    by a single VM.
-
--   **Elastic File System (EFS)** - file storage meant for use as shared storage
-    for up to thousands of EC2 instances.
-
-In Azure Storage, subscription-bound [storage
-accounts](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/)
-allow you to create and manage the following storage services:
-
--   [Blob
-    storage](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/) - stores any type of text or binary data, such as a document, media file, or
-    application installer. You can set Blob storage for private access or share
-    contents publicly to the Internet. Blob storage serves the same purpose as
-    both AWS S3 and EBS.
--   [Table
-    storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/) - stores structured datasets. Table storage is a NoSQL key-attribute data
-    store that allows for rapid development and fast access to large quantities
-    of data. Similar to AWS' SimpleDB and DynamoDB services.
-
--   [Queue
-    storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - provides messaging for workflow processing and for communication between
-    components of cloud services.
-
--   [File
-    storage](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/) - offers shared storage for legacy applications using the standard server
-    message block (SMB) protocol. File storage is used in a similar manner to
-    EFS in the AWS platform.
- 
-#### Glacier and Azure Storage 
-
-[Azure Archive Blob Storage](/azure/storage/blobs/storage-blob-storage-tiers#archive-access-tier) is comparable to AWS Glacier storage service. It is intended for rarely accessed data that is stored for at least 180 days and can tolerate several hours of retrieval latency. 
-
-For data that is infrequently accessed but must be available immediately when accessed, [Azure Cool Blob Storage tier](/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) provides cheaper storage than standard blob storage. This storage tier is comparable to AWS S3 - Infrequent Access storage service.
-
-#### See also
-
--   [Microsoft Azure Storage Performance and Scalability
-    Checklist](https://azure.microsoft.com/documentation/articles/storage-performance-checklist/)
-
--   [Azure Storage security
-    guide](https://azure.microsoft.com/documentation/articles/storage-security-guide/)
-
--   [Patterns & Practices: Content Delivery Network (CDN)
-    guidance](https://azure.microsoft.com/documentation/articles/best-practices-cdn/)
-
-### Networking
-
-#### Elastic Load Balancing, Azure Load Balancer, and Azure Application Gateway
-
-The Azure equivalents of the two Elastic Load Balancing services are:
-
--   [Load
-    Balancer](https://azure.microsoft.com/documentation/articles/load-balancer-overview/) - provides the same capabilities as the AWS Classic Load Balancer, allowing
-    you to distribute traffic for multiple VMs at the network level. It also
-    provides failover capability.
-
--   [Application
-    Gateway](https://azure.microsoft.com/documentation/articles/application-gateway-introduction/) - offers application-level rule-based routing comparable to the AWS
-    Application Load Balancer.
-
-#### Route 53, Azure DNS, and Azure Traffic Manager
-
-In AWS, Route 53 provides both DNS name management and DNS-level traffic routing
-and failover services. In Azure this is handled through two services:
-
--   [Azure DNS](https://azure.microsoft.com/documentation/services/dns/) provides domain and DNS management.
-
--   [Traffic
-    Manager][traffic-manager] provides DNS level traffic routing, load balancing, and failover
-    capabilities.
-
-#### Direct Connect and Azure ExpressRoute
-
-Azure provides similar site-to-site dedicated connections through its
-[ExpressRoute](https://azure.microsoft.com/documentation/services/expressroute/)
-service. ExpressRoute allows you to connect your local network directly to Azure
-resources using a dedicated private network connection. Azure also offers more
-conventional [site-to-site VPN
-connections](https://azure.microsoft.com/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/)
-at a lower cost.
-
-#### See also
-
--   [Create a virtual network using the Azure
-    portal](https://azure.microsoft.com/documentation/articles/virtual-networks-create-vnet-arm-pportal/)
-
--   [Plan and design Azure Virtual
-    Networks](https://azure.microsoft.com/documentation/articles/virtual-network-vnet-plan-design-arm/)
-
--   [Azure Network Security Best
-    Practices](https://azure.microsoft.com/documentation/articles/azure-security-network-security-best-practices/)
-
-### Database services
-
-#### RDS and Azure relational database services
-
-Azure provides several different relational database services that are the equivalent of AWS' Relational Database Service (RDS).
-
--   [SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)
--   [Azure Database for MySQL](https://docs.microsoft.com/azure/mysql/overview)
--   [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
-
-Other database engines such as 
-[SQL
-Server](https://azure.microsoft.com/services/virtual-machines/sql-server/),
-[Oracle](https://azure.microsoft.com/campaigns/oracle/), and
-[MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/)
-can be deployed using Azure VM Instances.
-
-Costs for AWS RDS are determined by the amount of hardware resources that your
-instance uses, like CPU, RAM, storage, and network bandwidth. In the Azure database services,
-cost depends on your database size, concurrent connections, and throughput levels.
-
-#### See also
-
--   [Azure SQL Database Tutorials](https://azure.microsoft.com/documentation/articles/sql-database-explore-tutorials/)
-
--   [Configure geo-replication for Azure SQL Database with the Azure portal](https://azure.microsoft.com/documentation/articles/sql-database-geo-replication-portal/)
-
--   [Introduction to Cosmos DB: A NoSQL JSON Database](/azure/cosmos-db/sql-api-introduction)
-
--   [How to use Azure Table storage from Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/)
-
-### Security and identity
-
-#### Directory service and Azure Active Directory
-
-Azure splits up directory services into the following offerings:
-
--   [Azure Active
-    Directory](https://azure.microsoft.com/documentation/articles/active-directory-whatis/) - cloud based directory and identity management service.
-
--   [Azure Active Directory
-    B2B](https://azure.microsoft.com/documentation/articles/active-directory-b2b-collaboration-overview/) - enables access to your corporate applications from partner-managed
-    identities.
-
--   [Azure Active Directory
-    B2C](https://azure.microsoft.com/documentation/articles/active-directory-b2c-overview/) - service offering support for single sign-on and user management for
-    consumer facing applications.
-
--   [Azure Active Directory Domain
-    Services](https://azure.microsoft.com/documentation/articles/active-directory-ds-overview/) - hosted domain controller service, allowing Active Directory compatible
-    domain join and user management functionality.
-
-#### Web application firewall
-
-In addition to the [Application Gateway Web Application
-Firewall](https://azure.microsoft.com/documentation/articles/application-gateway-webapplicationfirewall-overview/),
-you can also [use web application
-firewalls](https://azure.microsoft.com/documentation/articles/application-gateway-webapplicationfirewall-overview/)
-from third-party vendors like [Barracuda
-Networks](https://azure.microsoft.com/marketplace/partners/barracudanetworks/waf/).
-
-#### See also
-
--   [Getting started with Microsoft Azure
-    security](https://azure.microsoft.com/documentation/articles/azure-security-getting-started/)
-
--   [Azure Identity Management and access control security best
-    practices](https://azure.microsoft.com/documentation/articles/azure-security-identity-management-best-practices/)
-
-### Application and messaging services
-
-#### Simple Email Service
-
-AWS provides the Simple Email Service (SES) for sending notification,
-transactional, or marketing emails. In Azure, third-party solutions like
-[Sendgrid](https://sendgrid.com/partners/azure/) provide email services.
-
-#### Simple Queueing Service
-
-AWS Simple Queueing Service (SQS) provides a messaging system for connecting
-applications, services, and devices within the AWS platform. Azure has two
-services that provide similar functionality:
-
--   [Queue
-    storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - a cloud messaging service that allows communication between application
-    components within the Azure platform.
-
--   [Service
-    Bus](https://azure.microsoft.com/services/service-bus/) - a more robust messaging system for connecting applications, services, and
-    devices. Using the related [Service Bus
-    relay](https://docs.microsoft.com/azure/service-bus-relay/relay-what-is-it),
-    Service Bus can also connect to remotely hosted applications and services.
-
-#### Device Farm
-
-The AWS Device Farm provides cross-device testing services. In Azure, [Xamarin
-Test Cloud](https://www.xamarin.com/test-cloud) provides similar cross-device
-front-end testing for mobile devices.
-
-In addition to front-end testing, the [Azure DevTest
-Labs](https://azure.microsoft.com/services/devtest-lab/) provides back end
-testing resources for Linux and Windows environments.
-
-#### See also
-
--   [How to use Queue storage from
-    Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/)
-
--   [How to use Service Bus
-    queues](https://azure.microsoft.com/documentation/articles/service-bus-nodejs-how-to-use-queues/)
-
-### Analytics and big data
-
-[The Cortana Intelligence
-Suite](https://azure.microsoft.com/suites/cortana-intelligence-suite/) is
-Azure's package of products and services designed to capture, organize, analyze,
-and visualize large amounts of data. The Cortana suite consists of the following
-services:
-
--   [HDInsight](https://azure.microsoft.com/documentation/services/hdinsight/) - managed Apache distribution that includes Hadoop, Spark, Storm, or HBase.
-
--   [Data
-    Factory](https://azure.microsoft.com/documentation/services/data-factory/) - provides data orchestration and data pipeline functionality.
-
--   [SQL Data
-    Warehouse](https://azure.microsoft.com/documentation/services/sql-data-warehouse/) - large-scale relational data storage.
-
--   [Data Lake
-    Store](https://azure.microsoft.com/documentation/services/data-lake-store/) - large-scale storage optimized for big data analytics workloads.
-
--   [Machine
-    Learning](https://azure.microsoft.com/documentation/services/machine-learning/) - used to build and apply predictive analytics on data.
-
--   [Stream
-    Analytics](https://azure.microsoft.com/documentation/services/stream-analytics/) - real-time data analysis.
-
--   [Data Lake
-    Analytics](https://azure.microsoft.com/documentation/articles/data-lake-analytics-overview/) - large-scale analytics service optimized to work with Data Lake Store
-
--   [PowerBI](https://powerbi.microsoft.com/) - used to power data
-    visualization.
-
-#### See also
-
--   [Cortana Intelligence Gallery](https://gallery.cortanaintelligence.com/)
-
--   [Understanding Microsoft big data
-    solutions](https://msdn.microsoft.com/library/dn749804.aspx)
-
--   [Azure Data Lake & Azure HDInsight
-    Blog](https://blogs.msdn.microsoft.com/azuredatalake/)
-
-### Internet of Things
-
-#### See also
-
--   [Get started with Azure IoT
-    Hub](https://azure.microsoft.com/documentation/articles/iot-hub-csharp-csharp-getstarted/)
-
--   [Comparison of IoT Hub and Event
-    Hubs](https://azure.microsoft.com/documentation/articles/iot-hub-compare-event-hubs/)
-
-### Mobile services
-
-#### Notifications
-
-Notification Hubs do not support sending SMS or email messages, so third-party
-services are needed for those delivery types.
-
-#### See also
-
--   [Create an Android
-    app](https://azure.microsoft.com/documentation/articles/app-service-mobile-android-get-started/)
-
--   [Authentication and Authorization in Azure Mobile
-    Apps](https://azure.microsoft.com/documentation/articles/app-service-mobile-auth/)
-
--   [Sending push notifications with Azure Notification
-    Hubs](https://azure.microsoft.com/documentation/articles/notification-hubs-android-push-notification-google-fcm-get-started/)
-
-### Management and monitoring
-
-#### See also
--   [Monitoring and diagnostics
-    guidance](https://azure.microsoft.com/documentation/articles/best-practices-monitoring/)
-
--   [Best practices for creating Azure Resource Manager
-    templates](https://azure.microsoft.com/documentation/articles/resource-manager-template-best-practices/)
-
--   [Azure Resource Manager Quickstart
-    templates](https://azure.microsoft.com/documentation/templates/)
-
-
-## Next steps
-
--   [Get started with Azure](https://azure.microsoft.com/get-started/)
-
--   [Azure solution
-    architectures](https://azure.microsoft.com/solutions/architecture/)
-
--   [Azure Reference
-    Architectures](https://azure.microsoft.com/documentation/articles/guidance-architecture/)
-
-
-<!-- links -->
-
-[paired-regions]: https://azure.microsoft.com/documentation/articles/best-practices-availability-paired-regions/
-[traffic-manager]: /azure/traffic-manager/
+- [Accounts and subscriptions on Azure and AWS](./accounts.md)
+- [Compute services on Azure and AWS](./compute.md)
+- [Data and AI](./data-ai.md)
+- [Relational database technologies on Azure and AWS](./databases.md)
+- [Messaging services on Azure and AWS](./messaging.md)
+- [Networking on Azure and AWS](./networking.md)
+- [Regions and zones on Azure and AWS](./regions-zones.md)
+- [Resource management on Azure and AWS](./resources.md)
+- [Multicloud identity with Azure and AWS](./security-identity.md)
+- [Storage on Azure and AWS](./storage.md)
+
+## Other services
+
+The preceding list doesn't include all services. The following tables describe some of the services that aren't included. They map each AWS service to its corresponding Azure service and provide a brief description of the service.
+
+### Marketplace
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS Marketplace](https://aws.amazon.com/marketplace) | [Azure Marketplace](https://azure.microsoft.com/marketplace) | These services present easy-to-deploy and automatically configured partner applications, including single virtual machine (VM) or multiple VM solutions. You can purchase software as a service (SaaS) products from either marketplace. Many of these offerings are eligible to count toward your Azure consumption commitment. To understand which offerings count toward your commitment, see [Azure consumption commitment benefit](/marketplace/azure-consumption-commitment-benefit#determine-which-offers-are-eligible-for-azure-consumption-commitments-maccctc). |
+
+### Time series databases and analytics
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [Amazon Timestream](https://aws.amazon.com/timestream) | [Azure Data Explorer](https://azure.microsoft.com/services/data-explorer) | Azure Data Explorer is a fully managed, low latency, and distributed big data analytics platform. It runs complex queries across petabytes of data and is optimized for log and time series data.|
+
+### DevOps and application monitoring
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [Amazon CloudWatch](https://aws.amazon.com/cloudwatch) and [AWS X-Ray](https://aws.amazon.com/xray/) | [Azure Monitor](https://azure.microsoft.com/services/monitor) | Azure Monitor is a comprehensive solution that you can use to collect, analyze, and act on telemetry from your cloud and on-premises environments. Use [Application Insights](/azure/azure-monitor/app/app-insights-overview), a feature of Azure Monitor, to instrument your code for more in-depth application performance monitoring. In AWS, you typically use both X-Ray and CloudWatch. |
+| [AWS CodeDeploy](https://aws.amazon.com/codedeploy) <br/><br/>[AWS CodeCommit (deprecated)](https://aws.amazon.com/codecommit/) <br/><br/>[AWS CodePipeline](https://aws.amazon.com/codepipeline) <br/><br/> [AWS CodeConnections](https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html) <br/><br/>[AWS CodeBuild](https://aws.amazon.com/codebuild)  | [Azure DevOps](https://azure.microsoft.com/services/devops/)<br/><br/> [GitHub](https://github.com) <br/><br/> [GitHub Actions](https://github.com/features/actions) | Azure DevOps is a single solution that focuses on collaboration, continuous integration and continuous delivery (CI/CD), code testing, code artifacts, security testing, and code management. <br/><br/> GitHub is a cloud-based platform that you can use to showcase, collaborate on, and manage code. <br/><br/> Use GitHub Actions to automate software development workflows. <br/><br/> AWS code products support many of these functions. AWS no longer provides a code repository to new customers, but it does allow integration with partner repositories via CodeConnections.|
+| [AWS CLI](https://aws.amazon.com/cli) <br/><br/>[AWS Tools for PowerShell](https://aws.amazon.com/powershell/) <br/><br/>[AWS SDKs](https://aws.amazon.com/developer/tools/)| [Azure CLI](/cli/azure/install-azure-cli) <br/><br/>[Azure PowerShell](/powershell/azure/overview) <br/><br/>[Azure SDKs](https://azure.github.io/azure-sdk/) | These services are built on top of the native REST API across all cloud services. Various programming language-specific wrappers provide easier ways to create solutions. |
+| [AWS CloudShell](https://aws.amazon.com/cloudshell) | [Azure Cloud Shell](/azure/cloud-shell/overview) | Azure Cloud Shell is an interactive, authenticated, browser-accessible shell that you can use to manage Azure resources. It gives you the flexibility to choose the shell experience, either Bash or PowerShell, that best suits the way you work. |
+| [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/) | [Azure Automation](https://azure.microsoft.com/services/automation) | Automation configures and operates applications of all shapes and sizes. It provides templates to create and manage a collection of resources. |
+| [AWS CloudFormation](https://aws.amazon.com/cloudformation) <br/><br/>[AWS Cloud Development Kit](https://aws.amazon.com/cdk) | [Azure Resource Manager](https://azure.microsoft.com/features/resource-manager) <br/><br/>[Bicep](/azure/azure-resource-manager/bicep/overview) <br/><br/>[VM extensions](/azure/virtual-machines/extensions/features-windows) <br/><br/>[Automation](https://azure.microsoft.com/services/automation)  <br/><br/> [Azure Developer CLI](/azure/developer/azure-developer-cli/) | These services provide ways for developers and cloud admins to build and deploy repeatable cloud environments by using declarative syntax or common programming languages to define infrastructure as code. |
+
+### Internet of Things (IoT)
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS IoT Core](https://aws.amazon.com/iot-core) | [Azure IoT Hub](https://azure.microsoft.com/services/iot-hub) | This service provides a cloud gateway for managing bidirectional communication more securely and at scale with billions of IoT devices. |
+| [AWS IoT Greengrass](https://aws.amazon.com/greengrass) | [Azure IoT Edge](https://azure.microsoft.com/services/iot-edge) | Use this service to deploy cloud intelligence directly onto IoT devices and cater to on-premises scenarios. |
+| [Amazon Data Firehose](https://aws.amazon.com/firehose/) and [Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams) | [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs) <br/><br/>[Azure Stream Analytics](https://azure.microsoft.com/products/stream-analytics) | These services facilitate the mass ingestion of events or messages, typically from devices and sensors. The data can then be processed in real-time microbatches or be written to storage for further analysis. Both Kinesis Data Streams and Stream Analytics have real-time data processing capabilities.|
+| [AWS IoT TwinMaker](https://aws.amazon.com/iot-twinmaker) | [Azure Digital Twins](https://azure.microsoft.com/services/digital-twins) | Use these services to create digital representations of real-world places, things, business processes, and people. Gain insights, drive the creation of better products and new customer experiences, and optimize operations and costs. |
+| [AWS IoT Device Management](https://aws.amazon.com/iot-device-management/)<br/><br/>[AWS IoT FleetWise](https://aws.amazon.com/iot-fleetwise/) | [Azure IoT Central](https://azure.microsoft.com/products/iot-central/) | Use these services to connect and manage IoT devices at scale. Use Azure IoT Central for general use cases and vehicle-based use cases. AWS provides IoT FleetWise specifically for vehicles.  |
+| [AWS IoT ExpressLink](https://aws.amazon.com/iot-expresslink/) | [Azure Sphere](/azure-sphere/product-overview/what-is-azure-sphere) | These services provide device modules and software that you can use to build custom internet-connected devices. |
+
+### Management and governance
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS Organizations](https://aws.amazon.com/organizations) | [Azure management groups](/azure/governance/management-groups)| Azure management groups help you organize your resources and subscriptions.|
+| [AWS Well-Architected Tool](https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html)| [Azure Well-Architected Review](/assessments/?mode=pre-assessment)| Examine your workload through the lenses of reliability, cost management, operational excellence, security, and performance efficiency. |
+| [AWS Trusted Advisor](https://aws.amazon.com/premiumsupport/technology/trusted-advisor) | [Azure Advisor](https://azure.microsoft.com/services/advisor) | Advisor provides analysis of cloud resource configuration and security to help subscribers use best practices and optimum configurations. |
+| [AWS Billing and Cost Management](https://docs.aws.amazon.com/account-billing/index.html) | [Microsoft Cost Management](/azure/cost-management-billing) | Cost Management helps you understand your Azure invoice or bill. It also helps you manage your billing account and subscriptions, monitor and control Azure spending, and optimize resource use. |
+| [Cost and Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) | [Cost details APIs](/azure/cost-management-billing/manage/consumption-api-overview#cost-details-apis) | These services help you generate, monitor, forecast, and share billing data for resource usage by time, organization, or product resources. |
+| [AWS Management Console](https://aws.amazon.com/console) | [Azure portal](https://azure.microsoft.com/features/azure-portal) | Azure portal is a unified management console that simplifies building, deploying, and operating your cloud resources. |
+| [AWS Application Discovery Service](https://aws.amazon.com/application-discovery) | [Azure Migrate and Modernize](https://azure.microsoft.com/services/azure-migrate) | Azure Migrate and Modernize assesses on-premises workloads for migration to Azure, performs performance-based sizing, and provides cost estimates. |
+| [AWS Systems Manager](https://aws.amazon.com/systems-manager) | [Azure Monitor](https://azure.microsoft.com/services/monitor) | Azure Monitor is a comprehensive solution that you can use to collect, analyze, and act on telemetry from your cloud and on-premises environments. |
+| [AWS Health Dashboard](https://aws.amazon.com/premiumsupport/technology/personal-health-dashboard) | [Azure Resource Health](/azure/resource-health/resource-health-overview) | See detailed information about the health of resources. Get recommendations for how to maintain resource health. |
+| [AWS CloudTrail](https://aws.amazon.com/cloudtrail) | [Activity log](/azure/azure-monitor/essentials/activity-log) | The activity log is a platform log in Azure that provides insight into subscription-level events, like when a resource is modified or when a VM is started. |
+| [AWS Config](https://aws.amazon.com/config) | [Azure Policy](/azure/governance/policy/overview)<br/><br/>[Application change analysis](/azure/azure-monitor/app/change-analysis) | Azure Policy helps you implement governance for resource consistency, regulatory compliance, security, cost, and management. Use Azure Policy for bulk remediation for existing resources and automatic remediation for new resources. You typically use AWS Config to monitor for configuration changes or to identify and remediate noncompliant resources.  |
+| [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer) | [Cost Management](https://azure.microsoft.com/services/cost-management) | Perform cost analysis and optimize cloud costs. |
+| [AWS Control Tower](https://aws.amazon.com/controltower) | [Azure Lighthouse](/azure/lighthouse/overview) | Set up and govern multiple-account or multiple-subscription environments. |
+| [AWS Resource Groups and Tag Editor](https://docs.aws.amazon.com/ARG) | [Resource Manager resource groups](/azure/azure-resource-manager/management/overview) and [tags](/azure/azure-resource-manager/management/tag-resources) | A resource group is a container that holds related resources for an Azure solution. Apply tags to your Azure resources to logically organize them by categories. |
+| [AWS AppConfig](https://aws.amazon.com/systems-manager/features/appconfig) | [Azure App Configuration](/azure/azure-app-configuration) | App Configuration is a managed service that helps developers simply and more securely centralize their application and feature settings. |
+| [AWS Service Catalog](https://aws.amazon.com/servicecatalog) | [Azure Managed Applications](/azure/azure-resource-manager/managed-applications/overview) | Azure Managed Applications provides cloud solutions that customers can easily deploy and operate. |
+
+### Authentication and authorization
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS IAM Identity Center](https://aws.amazon.com/iam/identity-center/)<br/><br/>[AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam) | [Microsoft Entra ID](https://www.microsoft.com/security/business/identity-access/microsoft-entra-id) | Use these services to more securely control access to services and resources and improve data security and protection. Create and manage users and groups, and use permissions to allow and deny access to resources. |
+| [AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam) | [Azure role-based access control (RBAC)](/azure/role-based-access-control/overview) | Azure RBAC helps you manage who can access Azure resources, which resources they can access, and what they can do with those resources. |
+| [AWS Organizations](https://aws.amazon.com/organizations) | [Azure management groups](https://azure.microsoft.com/get-started/azure-portal/management-groups/) | These services provide security policy and role management when you work with multiple accounts. |
+| [Multi-Factor Authentication (MFA) for IAM](https://aws.amazon.com/iam/features/mfa) | [Microsoft Entra ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id) | Help safeguard access to data and applications while providing a simple sign-in process to users. |
+| [AWS Directory Service](https://aws.amazon.com/directoryservice) | [Microsoft Entra Domain Services](/entra/identity/domain-services/overview) | Domain Services provides managed domain services, such as domain join, group policy, LDAP, and Kerberos/NTLM authentication, which are fully compatible with Windows Server Active Directory. |
+| [Amazon Cognito](https://aws.amazon.com/cognito) | [Microsoft identity platform](/entra/identity-platform/v2-overview) and [Microsoft Entra External ID](/entra/external-id/external-identities-overview) | External ID is a highly available, global identity management service for consumer-facing applications in which you need to support "bring your own identity" scenarios, such as identities from Google or Meta. |
+
+### Encryption
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [Server-side encryption with AWS Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) | [Azure Storage service-side encryption](/azure/storage/storage-service-encryption) | Service-side encryption helps you protect your data and meet your organization's security and compliance commitments. |
+| [AWS Key Management Service (KMS)](https://aws.amazon.com/kms), [AWS CloudHSM](https://aws.amazon.com/cloudhsm) | [Azure Key Vault](https://azure.microsoft.com/services/key-vault) <br/><br> [Azure Key Vault Managed HSM](/azure/key-vault/managed-hsm/overview) | Improve security and work with other services by providing a way to manage, create, and control encryption keys that hardware security modules (HSMs) store. Key Vault provides a shared HSM or a dedicated HSM. On AWS, KMS uses a shared HSM. CloudHSM is a dedicated HSM. Both platforms provide Federal Information Processing Standards-validated options. |
+| [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/) | [Azure confidential computing](https://azure.microsoft.com/solutions/confidential-compute/) | Azure confidential computing provides platforms that have more controls to help protect data while it's being processed. It can also remotely verify platform trustworthiness. Azure also provides Azure SQL Always Encrypted and confidential VMs for Azure Virtual Desktop, Azure Data Explorer, and Azure Databricks. |
+
+### Firewalls
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS WAF](https://aws.amazon.com/waf) | [Azure web application firewall](https://azure.microsoft.com/products/web-application-firewall) | These firewalls help protect web applications from common web exploits. |
+| [AWS Network Firewall](https://aws.amazon.com/network-firewall)| [Azure Firewall](https://azure.microsoft.com/services/azure-firewall) | These services improve inbound protection and outbound network-level protection across all ports and protocols. Both solutions support the ability to inspect and apply rules for encrypted web traffic. |
+
+### Security
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [Amazon Inspector](https://aws.amazon.com/inspector) | [Microsoft Defender for Cloud](https://azure.microsoft.com/products/defender-for-cloud/) | Defender for Cloud is an automated security assessment service that improves the security and compliance of applications. It automatically assesses applications for vulnerabilities or deviations from best practices. |
+| [AWS Certificate Manager](https://aws.amazon.com/certificate-manager) | [Key Vault certificates](/azure/key-vault/certificates/about-certificates) <br/><br> [Microsoft Cloud PKI](https://www.microsoft.com/security/business/endpoint-management/microsoft-cloud-PKI)| Use these services to create and manage certificates and their keys. |
+| [Amazon GuardDuty](https://aws.amazon.com/guardduty/) | [Microsoft Sentinel](https://azure.microsoft.com/products/microsoft-sentinel/) | Detect and investigate advanced attacks on-premises and in the cloud. |
+| [AWS Artifact](https://aws.amazon.com/artifact) | [Microsoft Service Trust Portal](https://servicetrust.microsoft.com/) | Use these services to access to audit reports, compliance guides, and trust documents from across cloud services. |
+| [AWS Shield](https://aws.amazon.com/shield) | [Azure DDoS Protection](/azure/security/fundamentals/ddos-best-practices) | These services provide cloud services that are better protected from distributed denial of services attacks. |
+
+### Web applications
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk) | [Azure App Service](https://azure.microsoft.com/services/app-service) | App Service is a managed hosting platform that provides easy-to-use services for deploying and scaling web applications and services. |
+| [Amazon API Gateway](https://aws.amazon.com/api-gateway) | [Azure API Management](https://azure.microsoft.com/services/api-management) | These services provide a turnkey solution for publishing APIs to internal and external customers. |
+| [Amazon CloudFront](https://aws.amazon.com/cloudfront) | [Azure Front Door](https://azure.microsoft.com/services/frontdoor) | Azure Front Door is a modern cloud content delivery network service that delivers high performance, scalability, and more secure user experiences for your content and applications. |
+| [AWS Global Accelerator](https://aws.amazon.com/global-accelerator) | [Azure Front Door](https://azure.microsoft.com/services/frontdoor) | Easily join your distributed microservices architectures into a single global application that uses HTTP load balancing and path-based routing rules. Automate turning up new regions and scale out by using API-driven global actions and independent fault-tolerance to your back-end microservices in Azure or anywhere. |
+| [AWS Global Accelerator](https://aws.amazon.com/global-accelerator) | [Cross-regional load balancer](/azure/load-balancer/cross-region-overview) | Distribute and load balance traffic across multiple Azure regions via a single, static, global anycast public IP address. |
+| [Amazon Lightsail](https://aws.amazon.com/lightsail) and [AWS Amplify](https://aws.amazon.com/amplify) | [App Service](https://azure.microsoft.com/services/app-service) | Build, deploy, and scale web apps on a fully managed platform. |
+| [AWS App Runner](https://aws.amazon.com/apprunner) | [Web App for Containers](https://azure.microsoft.com/services/app-service/containers) | Easily deploy and run containerized web apps on Windows and Linux. |
+
+### End-user computing
+
+| AWS service | Azure service | Description |
+| :---------- | :------------ | :---------- |
+| [Amazon WorkSpaces Family](https://aws.amazon.com/workspaces), [Amazon AppStream 2.0](https://aws.amazon.com/appstream2) | [Azure Virtual Desktop](/azure/virtual-desktop) | Manage virtual desktops and applications to give users access to the corporate network and data anytime, anywhere, and on supported devices. WorkSpaces Family supports Windows and Linux virtual desktops. Azure Virtual Desktop supports single and multiple-session Windows virtual desktops.|
+
+## Miscellaneous
+
+| Area | AWS service | Azure service | Description |
+|------|-------------|---------------|-------------|
+| Back-end process logic | [AWS Step Functions](https://aws.amazon.com/step-functions) | [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps) | Use these cloud technologies to build distributed applications by using out-of-the-box connectors to reduce integration challenges. Connect apps, data, and devices on-premises or in the cloud. |
+| Enterprise application services | [Amazon WorkMail](https://aws.amazon.com/workmail), [Amazon WorkDocs (deprecated)](https://aws.amazon.com/workdocs), [Amazon Chime](https://aws.amazon.com/chime) | [Microsoft 365](https://www.microsoft.com/microsoft-365) | These fully integrated cloud services provide communications, email, and document management in the cloud. They're available on various devices. |
+| Gaming | [Amazon GameLift](https://aws.amazon.com/gamelift) | [Microsoft Azure PlayFab](https://playfab.com) | These managed services host dedicated game servers. |
+| Workflow | [AWS Step Functions](https://aws.amazon.com/step-functions) | [Logic Apps](https://azure.microsoft.com/services/logic-apps) | Use this serverless technology to connect apps, data, and devices anywhere, including on-premises or in the cloud, for large ecosystems of SaaS and cloud-based connectors. |
+| Hybrid | [AWS Outposts Family](https://aws.amazon.com/outposts) | [Azure Arc](/azure/azure-arc/overview) <br/><br/>[Azure Local](/azure/azure-local/overview) | Use AWS Outposts and Azure Local to extend your cloud datacenter to the edge by using platforms that combine hardware and software. Use Azure Arc to extend Azure management capabilities to on-premises or multicloud environments. |
+| Media | [Amazon Elastic Transcoder](https://aws.amazon.com/elastictranscoder)<br/><br> [AWS Elemental MediaConvert](https://aws.amazon.com/mediaconvert) | None | Azure doesn't provide media services, but we recommend several [partner solutions](/previous-versions/azure/media-services/latest/azure-media-services-retirement). |
+| Satellite | [AWS Ground Station](https://aws.amazon.com/ground-station) | None | Microsoft doesn't provide fully managed ground stations. For global environmental data provided by Microsoft, see [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/). Or you can use [data provided by NASA](https://www.earthdata.nasa.gov/). |
+| Quantum computing | [Amazon Braket](https://aws.amazon.com/braket) | [Azure Quantum](/azure/quantum/overview-azure-quantum) | Developers, researchers, and businesses can use these managed quantum computing services to run quantum computing programs.|
+| Data sharing | [AWS Data Exchange](https://aws.amazon.com/data-exchange/) | [Azure Data Share](https://azure.microsoft.com/products/data-share/) | Securely share data with other organizations.|
+| Contact center | [Amazon Connect](https://aws.amazon.com/connect/) | [Dynamics 365 Contact Center](/dynamics365/contact-center/implement/overview-contact-center) | Connect with customers by using these AI-powered cloud contact center capabilities.|
+
+## Next step
+
+> [!div class="nextstepaction"]
+> [Azure and AWS accounts and subscriptions](./accounts.md)

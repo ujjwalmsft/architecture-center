@@ -1,11 +1,16 @@
 ---
-title: Choosing a data pipeline orchestration technology
-description: 
-author: zoinerTejada
-ms:date: 02/12/2018
+title: Choose a data pipeline orchestration technology
+description: Choose an Azure data pipeline orchestration technology to automate pipeline orchestration, control flow, and data movement workflows.
+author: claytonsiemens77
+ms.author: pnp
+ms.date: 07/25/2022
+ms.topic: conceptual
+ms.subservice: architecture-guide
 ---
 
-# Choosing a data pipeline orchestration technology in Azure
+<!-- cSpell:ignore Oozie HDFS SSMS -->
+
+# Choose a data pipeline orchestration technology in Azure
 
 Most big data solutions consist of repeated data processing operations, encapsulated in workflows. A pipeline orchestrator is a tool that helps to automate these workflows. An orchestrator can schedule jobs, execute workflows, and coordinate dependencies among tasks.
 
@@ -37,7 +42,7 @@ The following tables summarize the key differences in capabilities.
 
 ### General capabilities
 
-| | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
+| Capability | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
 | --- | --- | --- | --- |
 | Managed | Yes | No | Yes |
 | Cloud-based | Yes | No (local) | Yes |
@@ -47,7 +52,7 @@ The following tables summarize the key differences in capabilities.
 
 ### Pipeline capabilities
 
-| | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
+| Capability | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
 | --- | --- | --- | --- |
 | Copy data | Yes | Yes | Yes |
 | Custom transformations | Yes | Yes | Yes (MapReduce, Pig, and Hive jobs) |
@@ -62,9 +67,26 @@ The following tables summarize the key differences in capabilities.
 
 ### Scalability capabilities
 
-| | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
+| Capability | Azure Data Factory | SQL Server Integration Services (SSIS) | Oozie on HDInsight
 | --- | --- | --- | --- |
 | Scale up | Yes | No | No |
 | Scale out | Yes | No | Yes (by adding worker nodes to cluster) |
 | Optimized for big data | Yes | No | Yes |
 
+## Contributors
+
+*This article is maintained by Microsoft. It was originally written by the following contributors.*
+
+Principal author:
+
+- [Zoiner Tejada](https://www.linkedin.com/in/zoinertejada) | CEO and Architect
+
+## Next steps
+
+- [Pipelines and activities in Azure Data Factory and Azure Synapse Analytics](/azure/data-factory/concepts-pipelines-activities)
+- [Provision the Azure-SSIS integration runtime in Azure Data Factory](/azure/data-factory/tutorial-deploy-ssis-packages-azure)
+- [Oozie on HDInsight](/azure/hdinsight/hdinsight-use-oozie-linux-mac)
+
+## Related resources
+
+- [DataOps for the modern data warehouse](../../databases/architecture/dataops-mdw.yml)

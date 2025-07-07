@@ -1,0 +1,27 @@
+### YamlMime:Architecture
+metadata:
+  title: Stream Processing with Databricks
+  description: Learn how to create a four-stage, end-to-end stream processing pipeline in Azure by using Azure Databricks.
+  author: garridoangelica
+  ms.author: agarrido
+  ms.date: 02/28/2025
+  ms.topic: reference-architecture
+  ms.subservice: reference-architecture
+  ms.category:
+    - analytics
+    - databases
+  ms.custom: arb-data
+name: Stream processing with Azure Databricks
+azureCategories:
+  - analytics
+  - databases
+summary: Create an end-to-end stream processing pipeline in Azure by using Azure Databricks.
+products:
+  - azure-cosmos-db  
+  - azure-databricks
+  - azure-event-hubs
+  - azure-log-analytics
+  - azure-monitor
+thumbnailUrl: /azure/architecture/browse/thumbs/stream-processing-databricks-thumbnail-new.png
+content: |
+   [!INCLUDE[](stream-processing-databricks-content.md)]

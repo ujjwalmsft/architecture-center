@@ -1,28 +1,42 @@
 ---
-title: Use managed services
-description: When possible, use platform as a service (PaaS) over infrastructure as a service (IaaS)
-author: MikeWasson
-ms.date: 08/30/2018
+title: Use platform as a service (PaaS) options
+description: "Understand the difference between infrastructure as a service (IaaS) and platform as a service (PaaS). Learn how to swap IaaS components for PaaS solutions."
+author: johndowns
+ms.author: pnp
+ms.date: 10/05/2024
+ms.topic: conceptual
+ms.subservice: architecture-guide
 ---
 
-# Use managed services
+# Use platform as a service (PaaS) options
 
-## When possible, use platform as a service (PaaS) rather than infrastructure as a service (IaaS)
+Infrastructure as a service (IaaS) and platform as a service (PaaS) are cloud service models.
 
-IaaS is like having a box of parts. You can build anything, but you have to assemble it yourself. Managed services are easier to configure and administer. You don't need to provision VMs, set up VNets, manage patches and updates, and all of the other overhead associated with running software on a VM.
+IaaS offers access to computing resources like servers, storage, and networks. The IaaS provider hosts and manages this infrastructure. Customers use the internet to access the hardware and resources.
 
-For example, suppose your application needs a message queue. You could set up your own messaging service on a VM, using something like RabbitMQ. But Azure Service Bus already provides reliable messaging as service, and it's simpler to set up. Just create a Service Bus namespace (which can be done as part of a deployment script) and then call Service Bus using the client SDK. 
+In contrast, PaaS provides a framework for developing and running apps. As with IaaS, the PaaS provider hosts and maintains the platform's servers, networks, storage, and other computing resources. But PaaS also includes tools, services, and systems that support the web application lifecycle. Developers use the platform to build apps without having to manage backups, security solutions, upgrades, and other administrative tasks.
 
-Of course, your application may have specific requirements that make an IaaS approach more suitable. However, even if your application is based on IaaS, look for places where it may be natural to incorporate managed services. These include cache, queues, and data storage.
+## Advantages of PaaS over IaaS
 
-| Instead of running... | Consider using... |
+When your workload doesn't require the control granted by IaaS, use PaaS instead. IaaS is like having a box of parts. You can build anything, but you have to assemble it yourself. PaaS options are easier to configure and administer. You don't need to set up virtual machines (VMs). You also don't have to handle all of the component's maintenance tasks, such as installing patches and updates.
+
+Many PaaS solutions offer a native scaling option that allow you to configure how the service will scale in and out or up and down. While scaling is possible in IaaS, it often comes with added complexity, such as dealing with attached storage.
+
+For example, suppose your application needs a message queue. You can set up your own messaging service on a virtual machine by using something like RabbitMQ. But Azure Service Bus provides a reliable messaging service, and it's simpler to maintain. You can create a Service Bus namespace as part of a deployment script. Then you can use a client SDK to call Service Bus.
+
+## PaaS alternatives to IaaS solutions
+
+Your application might have specific requirements that make IaaS a more suitable approach than PaaS. But you can still look for places to incorporate PaaS options. A few examples include caches, queues, and data storage. The following table provides other examples.
+
+| Instead of running ... | Consider using ... |
 |-----------------------|-------------|
-| Active Directory | Azure Active Directory Domain Services |
-| Elasticsearch | Azure Search |
-| Hadoop | HDInsight |
-| IIS | App Service |
-| MongoDB | Cosmos DB |
-| Redis | Azure Redis Cache |
-| SQL Server | Azure SQL Database |
+| Active Directory | [Microsoft Entra ID](/entra/fundamentals/whatis) |
+| Elasticsearch | [Azure AI Search](/azure/search/search-what-is-azure-search) |
+| Hadoop | [Azure HDInsight](/azure/hdinsight/hdinsight-overview) |
+| IIS | [Azure App Service](/azure/app-service/overview) |
+| MongoDB | [Azure Cosmos DB for MongoDB](/azure/cosmos-db/mongodb/introduction) |
+| Redis | [Azure Cache for Redis](/azure/azure-cache-for-redis/cache-overview) |
+| SQL Server | [Azure SQL Database](/azure/azure-sql/database/sql-database-paas-overview) |
+| File share | [Azure Files](/azure/storage/files/storage-files-introduction) |
 
-
+This list isn't exhaustive. There are many ways that you can exchange self-managed, IaaS technologies for related PaaS solutions.
